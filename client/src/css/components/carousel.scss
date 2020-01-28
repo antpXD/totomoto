@@ -1,0 +1,235 @@
+@import "../settings/fontawesome/scss/fontawesome.scss";
+@import "../settings/fontawesome/scss/solid.scss";
+
+//HOME PAGE SLIDER
+.hero-section {
+  max-width: 1450px;
+  margin: 0 auto;
+}
+
+.hero-carousel {
+  margin-bottom: 56px;
+  width: 100%;
+  height: 70vh;
+  z-index: 98 !important;
+}
+
+.hero-image {
+  height: 70vh;
+  object-position: center;
+  object-fit: cover;
+}
+
+.hero-slider .slick-list {
+  background: #333;
+  color: white;
+  border-radius: 20px;
+  position: relative;
+}
+
+// allows to click links on carousel
+.hero-slider .slick-list .slick-slide {
+  visibility: hidden;
+}
+.hero-slider .slick-list .slick-slide.slick-active {
+  visibility: visible;
+}
+
+// dots
+.hero-carousel .hero-slider .slick-dots {
+  position: absolute;
+  bottom: 50px !important;
+  z-index: 99;
+}
+
+.fa-circle-notch {
+  color: rgba(255, 255, 255, 0.247);
+  font-size: 0.8rem;
+  transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.hero-carousel .hero-slider .slick-dots li.slick-active .slider-dot {
+  color: rgba(255, 255, 255, 0.747);
+  font-size: 0.9rem;
+  transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.slider-dot:hover {
+  color: rgba(255, 255, 255, 0.747);
+  transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+//slider captions
+.slider-text {
+  &__box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    &::before {
+      content: "";
+      display: block;
+      background: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      transition: all ease-in-out 300ms;
+      z-index: -1;
+      border-radius: 5px;
+    }
+  }
+  &__container {
+    grid-column: 1;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    height: 50%;
+    z-index: 2;
+  }
+  &__header {
+    font-family: $font-header;
+    color: #fff500;
+    font-weight: bold;
+    line-height: 1.2;
+    &--big {
+      font-size: 48px;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    &--small {
+      font-size: 14px;
+    }
+  }
+  &__details {
+    font-family: $font-header;
+    font-size: 18px;
+    color: #cacaca;
+    font-weight: bold;
+  }
+  &__description {
+    font-family: $font-default;
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 350px;
+    line-height: 1.6em;
+    text-align: right;
+    white-space: nowrap;
+  }
+  &__link {
+    color: rgb(219, 76, 124);
+    z-index: 999;
+    cursor: pointer;
+    font-weight: bold;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.carousel-arrow {
+  &--next::before {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+    z-index: 99;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    top: 50%;
+    right: -20px;
+    height: 10%;
+    width: 100px;
+    transform: translate(-50%, -50%);
+  }
+  &--prev::before {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+    z-index: 99;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    top: 50%;
+    left: 20px;
+    height: 10%;
+    width: 100px;
+  }
+}
+
+.slick-prev::before:hover {
+  opacity: 0.5;
+  transition: all 0.3s ease-in-out !important;
+}
+
+.slick-next::before:hover {
+  opacity: 0.5;
+  transition: all 0.3s ease-in-out !important;
+}
+
+// OFFER DETAILS SLIDER
+.carousel-container {
+  display: flex !important;
+}
+
+.carousel-image {
+  object-fit: cover;
+  height: 70vh;
+}
+
+.big-carousel {
+  width: 80% !important;
+}
+
+.big-slider .slick-list {
+  cursor: pointer;
+  background: #000;
+  border-radius: 20px;
+  height: 61vh;
+}
+
+/* vertical SLIDER */
+.small-carousel {
+  padding-left: 30px;
+  border-radius: 20px;
+}
+
+.small {
+  width: 250px !important;
+  height: 130px !important;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.slick-vertical {
+  padding-top: 30px;
+}
+
+.small-carousel .slick-vertical .slick-list {
+  height: 60vh !important;
+  border-radius: 10px;
+  width: 250px;
+}
+
+.small-carousel .slick-vertical .slick-arrow {
+  display: none !important;
+}

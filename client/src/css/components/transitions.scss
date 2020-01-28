@@ -1,0 +1,80 @@
+// CSS TRANSITION GROUP - animates adding/deleting offers
+.fade-appear,
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+.fade-appear-active,
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 200ms linear 150ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  transition: opacity 150ms linear;
+}
+
+// CSS TRANSITION GROUP ROUTER - animates between pages
+.fade-appear,
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+.fade-appear-active,
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 200ms linear 150ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  transition: opacity 150ms linear;
+}
+
+// CSS TRANSITION GROUP - animates appear/exit of homepage slider
+.slider-appear,
+.slider-enter {
+  height: 0;
+  z-index: 1;
+}
+.slider-appear-active,
+.slider-enter.fade-enter-active {
+  height: 500px;
+  transition: all 2000ms linear 1500ms;
+}
+
+.slider-exit {
+  height: 100vh;
+}
+
+.slider-exit.slider-exit-active {
+  opacity: 100vh;
+  transition: all 1500ms linear;
+}
+
+@keyframes animateIn {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(50deg);
+  }
+}
+
+@keyframes animateOut {
+  from {
+    height: 500px;
+  }
+  to {
+    height: 100vh;
+  }
+}

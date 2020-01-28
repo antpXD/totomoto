@@ -1,0 +1,97 @@
+/* Navbar */
+.navbar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 12vh;
+  z-index: 1;
+  max-width: 1450px;
+  margin: auto;
+  font-size: 1rem;
+}
+
+.navbar ul {
+  display: flex;
+}
+
+.navbar a {
+  color: #000;
+  padding: 0.45rem 0;
+  margin: 0 0.25rem;
+}
+
+/* .navbar a:hover {
+    color: var(--danger-color);
+  } */
+
+.navbar li {
+  cursor: pointer;
+  text-align: center;
+}
+
+.navbar li a:hover,
+.navbar li:hover a {
+  transition: 0.5s;
+  color: #333;
+}
+
+.navbar .welcome span {
+  margin-right: 0.6rem;
+}
+
+.logo {
+  position: relative;
+  font-family: $font-logo;
+  font-size: 36px;
+  font-weight: 500;
+  text-decoration: none;
+  color: black;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: $font-header;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logout-btn:hover .logout-btn {
+  color: $secondary-color;
+  transition: all 200ms ease-in;
+}
+
+.fa-user {
+  font-size: 1.7rem;
+  padding: 0 0 0 24px;
+  transition: all 200ms ease-in;
+}
+
+/* Mobile Styles */
+@media (max-width: 700px) {
+  .hide-sm {
+    display: none;
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Navbar */
+  .navbar {
+    display: block;
+    text-align: center;
+  }
+
+  .navbar ul {
+    text-align: center;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,93 @@
+.card {
+  position: relative;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  border-radius: 16px;
+  margin: 2.5rem 0.7rem;
+  background: #fff;
+  width: 900px;
+  height: 200px;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+  &__image {
+    cursor: pointer;
+    width: 355px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 16px;
+    transition: all 0.2s ease-in-out;
+  }
+  &__actions {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  &__details {
+    padding: 16px 24px;
+    max-width: 550px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &__item {
+    cursor: pointer;
+    flex-direction: row;
+    border: 1px solid #dadada;
+    border-radius: 8px;
+    color: #515151;
+    height: 25px;
+    padding: 0px 20px;
+    margin: 5px;
+    white-space: nowrap;
+    width: auto;
+    font-size: 15px;
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  &__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  &__follow {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: $dark-color;
+    cursor: pointer;
+    .fa-star {
+      font-size: 24px;
+      padding: 0 0 0 8px;
+    }
+  }
+  &__price {
+    position: absolute;
+    right: 24px;
+    bottom: 16px;
+    font-family: $font-header;
+    font-size: 28px;
+    font-weight: bold;
+    color: $secondary-color;
+  }
+}
+
+.card:hover {
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+}
+
+.card:hover .card__image {
+  transform: scale(1.008);
+  transition: all 0.2s ease-in-out;
+}

@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900|Poppins:400,500,600,700,800,900|Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800,900&display=swap");
+
+@font-face {
+  font-family: Moderan;
+  src: url(../../fonts/Moderan.ttf);
+}
+
+$font-logo: Moderan, sans-serif;
+$font-header: "Montserrat", sans-serif;
+$font-default: "Nunito", sans-serif;

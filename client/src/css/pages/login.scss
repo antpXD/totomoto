@@ -1,0 +1,40 @@
+.form-section {
+  position: absolute;
+  top: 110px;
+  left: 150px;
+  width: 600px;
+  background: white;
+  border-radius: 4px;
+  &__container {
+    margin: 40px 90px;
+  }
+  &__title {
+    padding-top: 90px;
+    font-size: 40px;
+    font-weight: 800;
+    color: $dark-color;
+    padding-bottom: 32px;
+  }
+  &__navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+    width: 100%;
+    font-size: 1rem;
+  }
+  &__actions {
+    padding-top: 32px;
+    width: 100%;
+    &--text {
+      padding-top: 14px;
+      font-weight: 600;
+      &:hover {
+        text-decoration: underline;
+      }
+      &:focus {
+        color: $primary-color;
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+a {
+  text-decoration: none;
+  transition: all 0.1s ease-in-out;
+}
+
+a:hover {
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: $font-header;
+}
+
+.fa-star {
+  padding: 0 8px 0 0;
+}
+
+.fa-clock {
+  padding: 0 8px 0 8px;
+}
+
+.fa-chevron-right {
+  padding: 0 0 0 1rem;
+}
+
+.section-title {
+  font-size: 40px;
+  font-weight: 800;
+  color: $dark-color;
+  margin-bottom: 32px;
+}
+
+.header-text {
+  font-size: 28px;
+  font-weight: bold;
+  color: #000;
+}
+
+.title-text {
+  padding-top: 8px;
+}
+
+.text-primary {
+  color: $primary-color;
+  transition: all 0.2s ease-in-out;
+}
+.text-secondary {
+  color: $secondary-color;
+  transition: all 0.2s ease-in-out;
+}
+
+.text-white {
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.text-black {
+  color: #000;
+  transition: all 0.2s ease-in-out;
+}
+
+.text-light {
+  color: $light-color;
+  transition: all 0.2s ease-in-out;
+}
+
+.text-dark {
+  color: $dark-color;
+  transition: all 0.2s ease-in-out;
+}
+
+.text-dark-secondary {
+  color: $dark-color;
+  transition: all 0.2s ease-in-out;
+}
+
+.text-error {
+  color: $error-color;
+}
+
+.text-error-dark {
+  color: $error-dark-color;
+}
