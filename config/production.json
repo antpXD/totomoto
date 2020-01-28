@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://siema:siema123@contactkeeper-zbcya.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "secret"
+}
