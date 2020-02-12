@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { CSSTransition } from "react-transition-group";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import Navbar from "./components/layout/Navbar";
 import Home from "./components/pages/Home/Home";
@@ -42,16 +42,24 @@ const App = () => {
           <Alerts />
           <Navbar />
           <ParallaxProvider>
-            <AnimatePresence exitBeforeEnter>
-              <Switch location={location}>
-                <Route exact path="/" component={Home} />
-                <PrivateRoute exact path="/user" component={User} />
-                <Route exact path="/offer/:id" component={OfferDetails} />
-                <Route exact path="/about" component={About} />
-                <Route exact path="/login" component={Login} />
-                <Route render={() => <NotFound />} />
-              </Switch>
-            </AnimatePresence>
+            {/* <AnimatePresence exitBeforeEnter> */}
+            <TransitionGroup>
+              <CSSTransition
+                key={location.pathname}
+                timeout={500}
+                classNames="page"
+              >
+                <Switch location={location}>
+                  <Route exact path="/" component={Home} />
+                  <PrivateRoute exact path="/user" component={User} />
+                  <Route path="/offer/:id" component={OfferDetails} />
+                  <Route exact path="/about" component={About} />
+                  <Route exact path="/login" component={Login} />
+                  <Route render={() => <NotFound />} />
+                </Switch>
+              </CSSTransition>
+            </TransitionGroup>
+            {/* </AnimatePresence> */}
           </ParallaxProvider>
         </AlertState>
       </OfferState>

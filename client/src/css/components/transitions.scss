@@ -20,61 +20,24 @@
 }
 
 // CSS TRANSITION GROUP ROUTER - animates between pages
-.fade-appear,
-.fade-enter {
+.page-enter {
   opacity: 0;
-  z-index: 1;
-}
-.fade-appear-active,
-.fade-enter.fade-enter-active {
-  opacity: 1;
-  transition: opacity 200ms linear 150ms;
+  transform: scale(1.1);
 }
 
-.fade-exit {
+.page-enter-active {
   opacity: 1;
+  transform: scale(1);
+  transition: opacity 300ms, transform 300ms;
 }
 
-.fade-exit.fade-exit-active {
+.page-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.page-exit-active {
   opacity: 0;
-  transition: opacity 150ms linear;
-}
-
-// CSS TRANSITION GROUP - animates appear/exit of homepage slider
-.slider-appear,
-.slider-enter {
-  height: 0;
-  z-index: 1;
-}
-.slider-appear-active,
-.slider-enter.fade-enter-active {
-  height: 500px;
-  transition: all 2000ms linear 1500ms;
-}
-
-.slider-exit {
-  height: 100vh;
-}
-
-.slider-exit.slider-exit-active {
-  opacity: 100vh;
-  transition: all 1500ms linear;
-}
-
-@keyframes animateIn {
-  from {
-    transform: rotate(0);
-  }
-  to {
-    transform: rotate(50deg);
-  }
-}
-
-@keyframes animateOut {
-  from {
-    height: 500px;
-  }
-  to {
-    height: 100vh;
-  }
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
 }
