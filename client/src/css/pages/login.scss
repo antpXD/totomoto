@@ -1,12 +1,7 @@
-.form-section {
-  position: absolute;
-  top: 110px;
-  left: 150px;
-  width: 600px;
-  background: white;
-  border-radius: 4px;
+.auth-section {
   &__container {
-    margin: 40px 90px;
+    max-width: 350px;
+    margin: 0 auto;
   }
   &__title {
     padding-top: 90px;
@@ -14,14 +9,6 @@
     font-weight: 800;
     color: $dark-color;
     padding-bottom: 32px;
-  }
-  &__navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1;
-    width: 100%;
-    font-size: 1rem;
   }
   &__actions {
     padding-top: 32px;

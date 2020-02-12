@@ -1,13 +1,11 @@
-import React, { useContext, Fragment, useEffect } from "react";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
-import Fade from "react-reveal/Fade";
+import React, { useContext, useEffect } from "react";
 
 import UserOfferItem from "./UserOfferItem";
 import Spinner from "../../layout/Spinner";
 
 import OfferContext from "../../../context/offer/offerContext";
 
-const UserOfferList = () => {
+const UserOfferList = ({ toggle }) => {
   const offerContext = useContext(OfferContext);
   const { userOffers, getOffers, loading } = offerContext;
 
@@ -21,27 +19,29 @@ const UserOfferList = () => {
   }
 
   return (
-    <Fragment>
-      {userOffers && !loading ? (
-        <TransitionGroup>
-          {userOffers && !loading ? (
-            userOffers.map(offer => (
-              // csstransition animates adding/deleting offer
-              <CSSTransition key={offer._id} timeout={500} classNames="item">
-                {/* fade animates offers on load */}
-                <Fade>
-                  <UserOfferItem offer={offer} />
-                </Fade>
-              </CSSTransition>
-            ))
-          ) : (
-            <Spinner />
-          )}
-        </TransitionGroup>
-      ) : (
-        <Spinner />
-      )}
-    </Fragment>
+    <div>
+      {/* <div className="header-section">
+        <h1 className="header-section__text">Hi, Piotrek.</h1>
+        <div className="add-offer__animated-button" onClick={toggle}>
+          <div className="animated-button-content">add offer</div>
+        </div>
+      </div> */}
+      <div className="round-container round-container--generic">
+        <div className="container">
+          <h1>Your offers</h1>
+          <div className="flex-row">
+            {userOffers && !loading ? (
+              userOffers.map(offer => (
+                <UserOfferItem offer={offer} key={offer._id} />
+              ))
+            ) : (
+              <Spinner />
+            )}
+          </div>
+          <div className="footer">FOOTER HERE</div>
+        </div>
+      </div>
+    </div>
   );
 };
 

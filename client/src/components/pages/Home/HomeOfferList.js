@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import Fade from "react-reveal/Fade";
 
 import OfferItem from "./HomeOfferItem";
 import Spinner from "../../layout/Spinner";
@@ -11,7 +10,7 @@ const HomeOfferList = ({ filteredOffers }) => {
   const { loading } = offerContext;
 
   if (filteredOffers && filteredOffers.length === 0 && !loading) {
-    return <h2>No results</h2>;
+    return <h3>No results</h3>;
   }
 
   return (
@@ -19,9 +18,7 @@ const HomeOfferList = ({ filteredOffers }) => {
       {filteredOffers && !loading ? (
         filteredOffers.map(offer => (
           // fade fires when offers are loaded
-          <Fade key={offer._id}>
-            <OfferItem offer={offer} />
-          </Fade>
+          <OfferItem offer={offer} key={offer._id} />
         ))
       ) : (
         <Spinner />

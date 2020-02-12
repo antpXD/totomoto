@@ -1,9 +1,11 @@
-$primary-color: #2e4c8d;
-// $primary-color: #8a2be2;
+$primary-color: #8a2be2;
 $secondary-color: #e31d65;
 $dark-color: #333;
 $light-color: #d8d8d8;
 $success-color: #7cbd77;
 $error-color: #e94633;
 $error-dark-color: #d13639;
-$test: rgba(51, 51, 51, 0.5);
+$white-color: #fff;
+
+$test: #cfcfcf;
+$pulse: cubic-bezier(0.6, -0.28, 0.735, 0.045);

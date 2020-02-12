@@ -1,8 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-
+import PropTypes from "prop-types";
 import { Tooltip } from "@material-ui/core/";
+
+const dateFormat = require("dateformat");
 
 const HomeOfferItem = ({ offer }) => {
   const {
@@ -18,9 +19,6 @@ const HomeOfferItem = ({ offer }) => {
     price
   } = offer;
 
-  // console.log(offer);
-  const dateFormat = require("dateformat");
-
   return (
     <div className="card">
       <Link to={`/offer/${_id}`}>
@@ -33,7 +31,7 @@ const HomeOfferItem = ({ offer }) => {
       <div className="card__details">
         <div>
           <div className="card__header">
-            <Link to={`/offer/${_id}`}>
+            <Link to={`/offer/${offer._id}`}>
               <h2 className="header-text">
                 {make.charAt(0).toUpperCase() + make.slice(1)}{" "}
                 {model.charAt(0).toUpperCase() + model.slice(1)}

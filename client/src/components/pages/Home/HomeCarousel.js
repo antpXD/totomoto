@@ -2,6 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
+import { Parallax } from "react-scroll-parallax";
+import { motion } from "framer-motion";
+import { zoomOut } from "../../../animations/animations";
 
 function NextArrow(props) {
   return (
@@ -38,48 +41,48 @@ const heroSliderSettings = {
 
 const HomeCarousel = ({ offers }) => {
   return (
-    <div>
-      <div className="hero-carousel">
-        {offers && (
-          <Slider {...heroSliderSettings}>
-            {offers.slice(0, 5).map((offer, index) => (
-              <div key={index}>
-                <img
+    <div className="hero-carousel">
+      {offers && (
+        <Slider {...heroSliderSettings}>
+          {offers.slice(0, 5).map((offer, index) => (
+            <div key={index}>
+              <Parallax y={[-28, 20]} tagOuter="figure">
+                <motion.img
+                  variants={zoomOut}
                   src={offer.image[0].filePath}
                   className="hero-image"
-                  alt=""
+                  alt={offer.make}
                 />
-                <div className="slider-text__box">
-                  <div className="slider-text__container">
-                    <div className="slider-text__header slider-text__header--small">
-                      Top random offers
-                    </div>
-                    <Link
-                      className="slider-text__header slider-text__header--big"
-                      to={`/offer/${offer._id}`}
-                    >
-                      {offer.make.charAt(0).toUpperCase() + offer.make.slice(1)}{" "}
-                      {offer.model.charAt(0).toUpperCase() +
-                        offer.model.slice(1)}
-                    </Link>
-
-                    <div className="slider-text__details">
-                      {offer.year} | {offer.fuelType} | {offer.condition} |{" "}
-                      {offer.mileage}
-                    </div>
-                    <Link
-                      className="slider-text__link"
-                      to={`/offer/${offer._id}`}
-                    >
-                      See offer...
-                    </Link>
+              </Parallax>
+              <div className="slider-text__box">
+                <div className="slider-text__container">
+                  <div className="slider-text__header slider-text__header--small">
+                    Top random offers
                   </div>
+                  <Link
+                    className="slider-text__header slider-text__header--big"
+                    to={`/offer/${offer._id}`}
+                  >
+                    {offer.make.charAt(0).toUpperCase() + offer.make.slice(1)}{" "}
+                    {offer.model.charAt(0).toUpperCase() + offer.model.slice(1)}
+                  </Link>
+
+                  <div className="slider-text__details">
+                    {offer.year} | {offer.fuelType} | {offer.condition} |{" "}
+                    {offer.mileage}
+                  </div>
+                  <Link
+                    className="slider-text__link"
+                    to={`/offer/${offer._id}`}
+                  >
+                    See offer...
+                  </Link>
                 </div>
               </div>
-            ))}
-          </Slider>
-        )}
-      </div>
+            </div>
+          ))}
+        </Slider>
+      )}
     </div>
   );
 };

@@ -7,10 +7,7 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     top: 0,
     left: 0,
-    right: 0,
-    "& > * + *": {
-      marginTop: theme.spacing(2)
-    }
+    right: 0
   },
   bar: {
     height: 4,
@@ -44,7 +41,7 @@ export default function Spinner() {
       <LinearProgress
         variant="determinate"
         value={completed}
-        color="primary"
+        color="secondary"
         className={classes.bar}
       />
     </div>

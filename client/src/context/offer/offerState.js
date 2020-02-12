@@ -93,6 +93,7 @@ const OfferState = props => {
         payload: res.data
       });
     } catch (error) {
+      console.log(error);
       dispatch({ type: OFFER_ERROR, payload: error.response.msg });
     }
   };

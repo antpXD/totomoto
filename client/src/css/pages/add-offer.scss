@@ -1,11 +1,163 @@
-.form-container {
-  max-width: 450px;
+// custom description input fix
+.MuiOutlinedInput-multiline {
+  background-color: transparent !important;
+  border: 2px solid $dark-color !important;
+  border-radius: 0;
 }
 
-.form-background {
-  background: url("../../images/add-offer.jpg") center no-repeat;
-  background-size: cover;
+.MuiOutlinedInput-multiline:hover {
+  border: 2px solid $primary-color !important;
+}
+
+.add-offer {
+  &__section {
+    // position: absolute;
+    // width: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    transition: all ease-in-out 0.3s;
+    // transform: translateY(-200px);
+  }
+  &__grid {
+    display: grid;
+    grid-template-columns: 345px 565px 345px;
+    grid-gap: 50px;
+  }
+  &__flex-container {
+    display: flex;
+  }
+  &__item {
+    width: 400px;
+    margin: 0 2%;
+  }
+  &__item-center {
+    width: 500px;
+    flex-grow: 1;
+    margin: 0 2%;
+  }
+
+  &__animated-button--disabled {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    background: #000;
+    color: #000;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    height: 60px;
+    width: 190px;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #333;
+      content: "";
+      transform: rotate(-90deg) translate(-50%, -100%);
+      transform-origin: top left;
+      transition: transform 0.3s;
+    }
+
+    &:after {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 2px;
+      bottom: 2px;
+      left: 2px;
+      right: 2px;
+      background: #333;
+      border: #000 solid 4px;
+      color: #000;
+      content: "";
+      font-family: "Montserrat", sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      height: 56px;
+      width: 186px;
+    }
+  }
+
+  &__animated-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    background: #000;
+    color: #000;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    height: 60px;
+    width: 190px;
+    cursor: pointer;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      content: "";
+      transform: rotate(-90deg) translate(-50%, -100%);
+      transform-origin: top left;
+      transition: transform 0.3s;
+    }
+
+    &:hover:before {
+      transform: rotate(0) translate(0);
+    }
+
+    &:after {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 2px;
+      bottom: 2px;
+      left: 2px;
+      right: 2px;
+      background: #fff;
+      border: #000 solid 4px;
+      color: #000;
+      content: "";
+      font-family: "Montserrat", sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      height: 56px;
+      width: 186px;
+    }
+  }
+}
+
+.animated-button-content {
+  position: absolute;
   display: flex;
-  // justify-content: center;
-  // align-items: center;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  top: 3;
+  bottom: 3;
+  left: 3;
+  right: 3;
+}
+
+.hide-header {
+  transition: all ease-in-out 0.3s;
+  transform: translateY(-150px);
 }

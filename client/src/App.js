@@ -1,13 +1,14 @@
-import React, { Fragment } from "react";
+import React from "react";
+import { Switch, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import { CSSTransition } from "react-transition-group";
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import Navbar from "./components/layout/Navbar";
 import Home from "./components/pages/Home/Home";
 import User from "./components/pages/User/User";
 import OfferDetails from "./components/pages/OfferDetails/OfferDetails";
 import NotFound from "./components/pages/NotFound";
 import About from "./components/pages/About";
-import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Alerts from "./components/layout/Alerts";
 import PrivateRoute from "./components/routing/PrivateRoute";
@@ -20,41 +21,38 @@ import setAuthToken from "./utils/setAuthToken";
 import "./css/App.scss";
 import "./css/settings/fontawesome/scss/fontawesome.scss";
 import "./css/settings/fontawesome/scss/solid.scss";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { ParallaxProvider } from "react-scroll-parallax";
 
 setAuthToken(localStorage.token);
 
+const routes = [
+  { path: "/", name: "Home", Component: Home },
+  { path: "/offer/:id", name: "About", Component: OfferDetails },
+  { path: "/login", name: "Login", Component: Login },
+  { path: "/about", name: "About", Component: About }
+];
+
 const App = () => {
+  const location = useLocation();
+
   return (
     <AuthState>
       <OfferState>
         <AlertState>
-          <Router>
-            <Fragment>
-              <Alerts />
-              <Route
-                render={({ location }) => (
-                  <TransitionGroup>
-                    <CSSTransition
-                      key={location.pathname}
-                      timeout={500}
-                      classNames="fade"
-                    >
-                      <Switch location={location}>
-                        <Route exact path="/" component={Home} />
-                        <PrivateRoute exact path="/user" component={User} />
-                        <Route path="/offer/:id" component={OfferDetails} />
-                        <Route exact path="/about" component={About} />
-                        <Route exact path="/register" component={Register} />
-                        <Route exact path="/login" component={Login} />
-                        <Route render={() => <NotFound />} />
-                      </Switch>
-                    </CSSTransition>
-                  </TransitionGroup>
-                )}
-              />
-            </Fragment>
-          </Router>
+          <Alerts />
+          <Navbar />
+          <ParallaxProvider>
+            <AnimatePresence exitBeforeEnter>
+              <Switch location={location}>
+                <Route exact path="/" component={Home} />
+                <PrivateRoute exact path="/user" component={User} />
+                <Route exact path="/offer/:id" component={OfferDetails} />
+                <Route exact path="/about" component={About} />
+                <Route exact path="/login" component={Login} />
+                <Route render={() => <NotFound />} />
+              </Switch>
+            </AnimatePresence>
+          </ParallaxProvider>
         </AlertState>
       </OfferState>
     </AuthState>

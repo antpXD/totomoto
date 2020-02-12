@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { slideOut } from "../../../animations/animations";
 import HomeCarousel from "./HomeCarousel";
 import HomeOfferList from "./HomeOfferList";
 import HomeFilters from "./HomeFilters";
-import Navbar from "../../layout/Navbar";
 import Spinner from "../../layout/Spinner";
-
+import { Parallax } from "react-scroll-parallax";
 import OfferContext from "../../../context/offer/offerContext";
-
 import useDebounce from "../../../utils/useDebounceHook";
 
 const FilterFunctions = ({ allOffers }) => {
@@ -138,7 +138,6 @@ const FilterFunctions = ({ allOffers }) => {
     });
   };
   const handleSliderBlur = name => {
-    console.log();
     if (passingTags[name][0] < 0) {
       setPassingTags({
         ...passingTags,
@@ -220,45 +219,51 @@ const FilterFunctions = ({ allOffers }) => {
 
   return (
     <>
-      <Navbar />
-      <div className="container">
-        {allOffers !== null && !loading ? (
-          <div className="hero-gallery">
-            <HomeCarousel offers={allOffers} />
-          </div>
-        ) : (
-          <Spinner />
-        )}
-        <div className="grid-2 grid-px">
-          <div className="left-panel__container">
-            <HomeFilters
-              handleCheckboxFilter={handleCheckboxFilter}
-              handleInputFilter={handleInputFilter}
-              handleSliderFilter={handleSliderFilter}
-              handleSliderInputMin={handleSliderInputMin}
-              handleSliderInputMax={handleSliderInputMax}
-              handleSliderBlur={handleSliderBlur}
-              passingTags={passingTags}
-              maxValues={maxValues}
-            />
-          </div>
-          <div className="right-panel__container">
-            <div className="flex-row">
-              <h1 className="section-title">
-                <span className="text-light">All</span>
-                <span className="text-dark">offers</span>
-              </h1>
-            </div>
-            {allOffers !== null && searchOffers !== null && !loading ? (
-              <>
-                <HomeOfferList filteredOffers={searchOffers()} />
-              </>
-            ) : (
-              <Spinner />
-            )}
-          </div>
+      {allOffers !== null && !loading ? (
+        <div className="hero-section">
+          <HomeCarousel offers={allOffers} />
         </div>
-      </div>
+      ) : (
+        <Spinner />
+      )}
+      <Parallax className="custom-class" y={[-200, 200]} tagOuter="figure">
+        <motion.div
+          className="round-container round-container--hero"
+          variants={slideOut}
+        >
+          <div className="container">
+            <div className="grid-2 grid-px">
+              <div className="left-panel__container">
+                <HomeFilters
+                  handleCheckboxFilter={handleCheckboxFilter}
+                  handleInputFilter={handleInputFilter}
+                  handleSliderFilter={handleSliderFilter}
+                  handleSliderInputMin={handleSliderInputMin}
+                  handleSliderInputMax={handleSliderInputMax}
+                  handleSliderBlur={handleSliderBlur}
+                  passingTags={passingTags}
+                  maxValues={maxValues}
+                />
+              </div>
+              <div className="right-panel__container">
+                <div className="flex-row">
+                  <h1 className="section-title">
+                    <span className="text-light">All</span>
+                    <span className="text-dark">offers</span>
+                  </h1>
+                </div>
+                {allOffers !== null && searchOffers !== null && !loading ? (
+                  <>
+                    <HomeOfferList filteredOffers={searchOffers()} />
+                  </>
+                ) : (
+                  <Spinner />
+                )}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </Parallax>
     </>
   );
 };

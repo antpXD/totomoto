@@ -5,13 +5,10 @@ import { useDropzone } from "react-dropzone";
 import OfferContext from "../../../context/offer/offerContext";
 import AlertContext from "../../../context/alert/alertContext";
 
-import { Button, makeStyles } from "@material-ui/core";
-import Fade from "react-reveal/Fade";
-
 const dropzone = {
-  backgroundColor: "#fff",
+  marginTop: "40px",
   borderWidth: "2px",
-  borderColor: "#e9ebeb",
+  borderColor: "#cfcfcf",
   borderStyle: "dashed",
   borderRadius: "10px",
   height: "125px",
@@ -19,14 +16,13 @@ const dropzone = {
   fontFamily: "'Montserrat', sans-serif",
   fontWeight: "500",
   textAlign: "center",
-  color: "#a8a8a8",
+  color: "#cfcfcf",
   outline: "0",
   transition: "border .24s ease-in-out",
   cursor: "pointer"
 };
 
 const activeStyle = {
-  color: "#333",
   borderColor: "#2196f3"
 };
 
@@ -38,51 +34,7 @@ const rejectStyle = {
   borderColor: "#ff1744"
 };
 
-const useStyles = makeStyles(theme => ({
-  removeBtn: {
-    position: "absolute",
-    border: "none",
-    boxShadow: "none",
-    borderRadius: "50%",
-    right: "-5px",
-    top: "-9px",
-    width: "25px",
-    height: "25px",
-    backgroundColor: "white",
-    zIndex: "99",
-    cursor: "pointer",
-    transition: "all .1s ease-in-out",
-    "&:hover": {
-      fontSize: "1.04rem",
-      transition: "all .1s ease-in-out"
-      // boxShadow: "0px 7px 10px rgba(0, 0, 0, 0.15)"
-    }
-  },
-  thumbsContainer: {
-    display: "grid",
-    width: "100%",
-    gridTemplateColumns: "repeat(2, 1fr)",
-    gridGap: 10,
-    marginTop: 16
-  },
-  thumb: {
-    marginBottom: 8,
-    marginRight: 8,
-    width: "100%",
-    height: "100%",
-    boxSizing: "border-box",
-    position: "relative"
-  },
-  thumbImg: {
-    width: "220px",
-    height: "120px",
-    borderRadius: 8,
-    objectFit: "cover"
-  }
-}));
-
 const UploadImage = ({ setFiles, files, isUploaded, setIsUploaded }) => {
-  const classes = useStyles();
   const offerContext = useContext(OfferContext);
   const { addImage, clearImage } = offerContext;
 
@@ -136,14 +88,16 @@ const UploadImage = ({ setFiles, files, isUploaded, setIsUploaded }) => {
   };
 
   const thumbs = files.map(file => (
-    <Fade key={file.name}>
-      <div className={classes.thumb}>
-        <img src={file.preview} className={classes.thumbImg} alt={file.name} />
-        <button onClick={removeFile(file)} className={classes.removeBtn}>
-          <i className="fas fa-times" style={{ padding: 0, color: "#000" }}></i>
-        </button>
+    <div key={file.name} className="thumbs__thumb" onClick={removeFile(file)}>
+      <img src={file.preview} className="thumbs__image" alt={file.name} />
+      <div className="thumbs__image-overlay">
+        <div className="thumbs__image-overlay-x">
+          <button>
+            <i className="fas fa-times"></i>
+          </button>
+        </div>
       </div>
-    </Fade>
+    </div>
   ));
 
   useEffect(
@@ -176,31 +130,35 @@ const UploadImage = ({ setFiles, files, isUploaded, setIsUploaded }) => {
 
   return (
     <section>
-      <div className={classes.thumbsContainer}>{thumbs}</div>
-      {files.length > 0 && isUploaded ? (
-        <Button onClick={onClear}>Change your photos</Button>
-      ) : null}
-      {files.length > 0 && !isUploaded ? (
-        <>
-          <Button onClick={onSubmit}>Upload</Button>
-          <Button onClick={onClear}>Clear</Button>
-        </>
-      ) : null}
-
-      {!isUploaded && (
-        <div {...getRootProps({ style })}>
+      {(!isUploaded || files.length <= 0) && (
+        <div {...getRootProps({ style })} className="thumbs__dropzone">
           <input {...getInputProps()} />
           {files.length > 0 ? (
-            <p>or add some more</p>
+            <p style={{ fontSize: "16px" }}>Add more images</p>
           ) : (
-            <p>Upload images (at least 5)</p>
+            <p style={{ fontSize: "16px" }}>Upload images (at least 5)</p>
           )}
-
           {isDragReject && (
             <p className="text-error">Only images will be uploaded</p>
           )}
         </div>
       )}
+      <div className="thumbs__container">{thumbs}</div>
+      {files.length > 0 && isUploaded ? (
+        <div className="underline" onClick={onClear}>
+          <p>Change your photos</p>
+        </div>
+      ) : null}
+      {files.length > 0 && !isUploaded ? (
+        <div className="flex-row center-horizontally">
+          <div className="underline" onClick={onSubmit}>
+            <p>Upload</p>
+          </div>
+          <div className="underline" onClick={onClear}>
+            <p>Clear</p>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 };

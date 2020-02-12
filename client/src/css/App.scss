@@ -11,11 +11,31 @@
 //components
 @import "./components/navbar.scss";
 @import "./components/card.scss";
+@import "./components/card-small.scss";
 @import "./components/carousel.scss";
+@import "./components/dropzone.scss";
 @import "./components/transitions.scss";
+@import "./components/animated-button.scss";
 
 //pages
 @import "./pages/offer-details.scss";
 @import "./pages/not-found.scss";
 @import "./pages/login.scss";
 @import "./pages/add-offer.scss";
+
+.header-background {
+  background-color: rgba(211, 76, 76, 0.445);
+  color: white;
+  font-size: 32px;
+  width: 100%;
+  height: 50vh;
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  margin: auto;
+}
+
+.info-container {
+  background-color: #fff;
+  color: black;
+  position: absolute;
+}

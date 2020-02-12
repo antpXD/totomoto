@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import { BrowserRouter } from "react-router-dom";
 
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
@@ -13,11 +14,11 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       light: "#d8d8d8",
-      main: "#8a2be2",
+      main: "#000",
       dark: "#333"
     },
     secondary: {
-      main: "#3cb9fc"
+      main: "#8a2be2"
     },
     error: {
       main: "#EB321E",
@@ -49,14 +50,14 @@ const theme = createMuiTheme({
       }
     },
 
-    //Outlined Input
+    //Add offer form input
     MuiOutlinedInput: {
       root: {
         fontFamily: '"Nunito", sans-serif',
         fontWeight: "600",
-        color: "#3A3A3A",
-        backgroundColor: "#f3f3f3",
-        border: "none",
+        color: "#fff",
+        backgroundColor: "#333",
+        border: "2px solid #333",
         borderRadius: 4,
         transition: "all .3s ease-in-out",
         "& fieldset": {
@@ -64,9 +65,10 @@ const theme = createMuiTheme({
           border: "none"
         },
         "&:hover": {
+          backgroundColor: "transparent",
+          border: "2px solid #8a2be2",
           transition: "all .3s ease-in-out",
-          boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.1)",
-          transform: "translateY(-2px)"
+          boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.1)"
         },
         "&$focused": {
           transition: "all .3s ease-in-out",
@@ -76,7 +78,7 @@ const theme = createMuiTheme({
       }
     },
 
-    //Filled Input
+    //Login / Register Inputs
     MuiFilledInput: {
       root: {
         color: "#3A3A3A",
@@ -103,24 +105,26 @@ const theme = createMuiTheme({
     //Text Input Labels
     MuiInputLabel: {
       root: {
-        color: "#7E7E7E",
+        color: "#fff",
         fontFamily: '"Montserrat", sans-serif',
         fontWeight: "600",
         fontSize: ".9rem",
         "&$focused": {
-          color: "#8a2be2" //primary.main
+          color: "#8a2be2",
+          fontSize: "1rem"
         },
         "&$outlined": {
           fontWeight: "600",
+          color: "#fff",
           "&$shrink": {
             top: "-12px",
             left: "-8px",
-            color: "#7E7E7E",
+            color: "#fff",
             fontSize: "1.2rem",
             fontWeight: "600"
           },
           "&$focused": {
-            color: "#8a2be2" //primary.main
+            color: "#8a2be2"
           }
         }
       }
@@ -179,6 +183,34 @@ const theme = createMuiTheme({
       }
     },
 
+    MuiFormControlLabel: {
+      root: {
+        marginLeft: 0
+      }
+    },
+
+    // radio button group title
+    MuiFormLabel: {
+      root: {
+        paddingBottom: 10,
+        fontSize: "18px",
+        fontWeight: "bold",
+        color: "white",
+        fontFamily: "'Montserrat', sans-serif",
+        "&$focused": {
+          color: "#8a2be2"
+        }
+      }
+    },
+    MuiRadio: {
+      root: {
+        color: "#fff"
+      }
+      // checked: {
+      //   color: "red"
+      // }
+    },
+
     //Checkbox
     MuiCheckbox: {
       root: {
@@ -207,13 +239,6 @@ const theme = createMuiTheme({
       }
     },
 
-    MuiSlider: {
-      root: {
-        margin: "0 24px",
-        padding: "20px 0"
-      }
-    },
-
     //Checkbox icon
     MuiIconButton: {
       root: {
@@ -222,9 +247,10 @@ const theme = createMuiTheme({
       }
     },
 
-    MuiFormControlLabel: {
+    MuiSlider: {
       root: {
-        marginLeft: 0
+        margin: "0 24px",
+        padding: "20px 0"
       }
     },
 
@@ -261,7 +287,11 @@ const theme = createMuiTheme({
         boxShadow: "none",
         transition: "all .2s ease-in-out",
         "&$contained": {
-          color: "white",
+          width: "180px",
+          height: "50px",
+          borderRadius: 0,
+          backgroundColor: "white",
+          color: "black",
           fontWeight: "600",
           "&:hover": {
             transition: "all .2s ease-in-out",
@@ -290,9 +320,11 @@ const theme = createMuiTheme({
 });
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <App />
-  </ThemeProvider>,
+  <BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </BrowserRouter>,
 
   document.getElementById("root")
 );

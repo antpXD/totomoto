@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
+import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import AuthContext from "../../../context/auth/authContext";
 import OfferContext from "../../../context/offer/offerContext";
 import Spinner from "../../layout/Spinner";
-import Navbar from "../../layout/Navbar";
 import OfferDetailsCarousel from "./OfferDetailsCarousel";
 
 import ReactQuill from "react-quill";
@@ -20,8 +20,12 @@ const OfferDetails = ({ match }) => {
   }, []);
 
   return (
-    <>
-      <Navbar />
+    <motion.div
+      className="wrapper"
+      exit={{ opacity: 0 }}
+      initial="initial"
+      animate="animate"
+    >
       {offerDetails !== null && !loading ? (
         <div className="container">
           <OfferDetailsCarousel images={offerDetails.image} />
@@ -110,7 +114,7 @@ const OfferDetails = ({ match }) => {
       ) : (
         <Spinner />
       )}
-    </>
+    </motion.div>
   );
 };
 
