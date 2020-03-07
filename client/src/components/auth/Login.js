@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CSSTransition } from "react-transition-group";
-import { Link } from "react-router-dom";
 import clsx from "clsx";
 import loginBG from "../../images/login.jpg";
 import registerBG from "../../images/register.jpg";
@@ -11,8 +10,8 @@ import useForm from "react-hook-form";
 
 import { Button, makeStyles } from "@material-ui/core";
 
-import ValidationInput from "../layout/ValidationInput";
-import PasswordInput from "../layout/PasswordInput";
+import ValidationInput from "../helpers/ValidationInput";
+import PasswordInput from "../helpers/PasswordInput";
 
 const useStyles = makeStyles(theme => ({
   borders: {
