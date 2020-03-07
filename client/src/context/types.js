@@ -1,4 +1,4 @@
-export const GET_OFFERS = "GET_OFFERS";
+export const GET_USER_OFFERS = "GET_USER_OFFERS";
 export const GET_ALL_OFFERS = "GET_ALL_OFFERS";
 export const GET_SINGLE_OFFER = "GET_SINGLE_OFFER";
 export const ADD_OFFER = "ADD_OFFER";

@@ -10,32 +10,29 @@
 
 //components
 @import "./components/navbar.scss";
+@import "./components/footer.scss";
 @import "./components/card.scss";
 @import "./components/card-small.scss";
-@import "./components/carousel.scss";
+@import "./components/carousel-hero.scss";
+@import "./components/carousel-details.scss";
 @import "./components/dropzone.scss";
+@import "./components/animated-underline.scss";
+@import "./components/add-offer.scss";
 @import "./components/transitions.scss";
-@import "./components/animated-button.scss";
 
 //pages
 @import "./pages/offer-details.scss";
 @import "./pages/not-found.scss";
+@import "./pages/user.scss";
 @import "./pages/login.scss";
-@import "./pages/add-offer.scss";
+@import "./pages/home.scss";
 
-.header-background {
-  background-color: rgba(211, 76, 76, 0.445);
-  color: white;
-  font-size: 32px;
-  width: 100%;
-  height: 50vh;
-  font-family: "Montserrat", sans-serif;
-  position: relative;
-  margin: auto;
-}
+//animations
+@import "./animations/login-animations.scss";
+@import "./animations/register-animations.scss";
 
-.info-container {
-  background-color: #fff;
-  color: black;
-  position: absolute;
-}
+// media queries
+@import "./media-queries/home-page.scss";
+@import "./media-queries/offer-details.scss";
+@import "./media-queries/footer.scss";
+

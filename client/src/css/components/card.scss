@@ -4,16 +4,17 @@
   align-content: center;
   flex-direction: row;
   border-radius: 16px;
-  margin: 2.5rem 0.7rem;
+  margin-left: 0.7rem;
+  margin-bottom: 2.5rem;
   background: #fff;
-  width: 900px;
+  width: 100%;
   height: 200px;
   overflow: hidden;
   transition: all 0.2s ease-in-out;
   &__image {
     cursor: pointer;
     width: 355px;
-    height: 200px;
+    height: 100%;
     object-fit: cover;
     border-radius: 16px;
     transition: all 0.2s ease-in-out;
@@ -51,7 +52,12 @@
   &__header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
+    h2 {
+      font-size: 28px;
+      font-weight: bold;
+      color: #000;
+    }
   }
   &__list {
     display: flex;
@@ -70,10 +76,18 @@
       padding: 0 0 0 8px;
     }
   }
+  &__date {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    .fa-clock {
+      padding: 0 8px;
+    }
+    p {
+      font-size: 16px;
+    }
+  }
   &__price {
-    position: absolute;
-    right: 24px;
-    bottom: 16px;
     font-family: $font-header;
     font-size: 28px;
     font-weight: bold;
@@ -90,4 +104,212 @@
 .card:hover .card__image {
   transform: scale(1.008);
   transition: all 0.2s ease-in-out;
+}
+
+@media (max-width: 1265px) {
+  .card {
+    margin: 0 0.7rem;
+    margin-bottom: 2.5rem;
+    width: 100%;
+    height: 180px;
+    &__follow {
+      p {
+        display: none;
+      }
+      .fa-star {
+        font-size: 20px;
+      }
+    }
+    &__details {
+      padding: 0 16px;
+    }
+    &__item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 8px;
+      margin: 3px;
+      font-size: 13px;
+    }
+  }
+}
+
+@media (max-width: 1125px) {
+  .card {
+    height: 170px;
+    &__image {
+      width: 300px;
+    }
+    &__header {
+      margin-bottom: 4px;
+      h2 {
+        font-size: 24px;
+      }
+    }
+    &__price {
+      font-size: 24px;
+    }
+    &__date {
+      .fa-clock {
+        padding: 0 4px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+}
+@media (max-width: 1050px) {
+  .card {
+    height: 150px;
+    &__image {
+      width: 255px;
+    }
+    &__header {
+      margin-bottom: 4px;
+      h2 {
+        font-size: 20px;
+      }
+    }
+    &__price {
+      font-size: 20px;
+    }
+    &__date {
+      .fa-clock {
+        padding: 0 2px;
+      }
+      p {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+@media (max-width: 965px) {
+  .card {
+    height: 200px;
+    &__image {
+      width: 355px;
+    }
+    &__header {
+      margin-bottom: 8px;
+      h2 {
+        font-size: 28px;
+      }
+    }
+    &__price {
+      font-size: 28px;
+    }
+    &__date {
+      .fa-clock {
+        padding: 0 4px;
+      }
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+}
+@media (max-width: 800px) {
+  .card {
+    height: 170px;
+    &__image {
+      width: 300px;
+    }
+    &__header {
+      margin-bottom: 4px;
+      h2 {
+        font-size: 24px;
+      }
+    }
+    &__price {
+      font-size: 24px;
+    }
+    &__date {
+      .fa-clock {
+        padding: 0 4px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .card {
+    height: 150px;
+    &__image {
+      width: 200px;
+    }
+    &__header {
+      margin-bottom: 4px;
+      h2 {
+        font-size: 20px;
+      }
+    }
+    &__price {
+      font-size: 20px;
+    }
+    &__date {
+      .fa-clock {
+        padding: 0 2px;
+      }
+      p {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    flex-direction: column;
+    width: 100%;
+    height: 320px;
+    margin: 0 0 2.5rem 0;
+    &__image {
+      width: 100%;
+      height: 183px;
+    }
+    &__header {
+      margin-bottom: 4px;
+      h2 {
+        font-size: 28px;
+      }
+    }
+    &__details {
+      height: 100%;
+    }
+  }
+}
+@media (max-width: 500px) {
+  .card {
+    &__header {
+      margin-bottom: 4px;
+      h2 {
+        font-size: 24px;
+      }
+    }
+  }
+}
+@media (max-width: 450px) {
+  .card {
+    height: 100%;
+    &__header {
+      margin-bottom: 4px;
+      h2 {
+        font-size: 20px;
+      }
+    }
+    &__item {
+      border: 1px solid #dadada;
+      color: #515151;
+      height: 25px;
+      padding: 0px 8px;
+      white-space: nowrap;
+      width: auto;
+      font-size: 12px;
+    }
+  }
 }

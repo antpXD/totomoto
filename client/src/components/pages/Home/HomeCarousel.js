@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { Parallax } from "react-scroll-parallax";
-import { motion } from "framer-motion";
-import { zoomOut } from "../../../animations/animations";
+import { CSSTransition } from "react-transition-group";
 
 function NextArrow(props) {
   return (
@@ -27,7 +26,7 @@ function PrevArrow(props) {
 const heroSliderSettings = {
   className: "hero-slider",
   autoplay: true,
-  autoplaySpeed: 10000,
+  autoplaySpeed: 5000,
   dots: true,
   fade: true,
   infinite: true,
@@ -41,30 +40,40 @@ const heroSliderSettings = {
 
 const HomeCarousel = ({ offers }) => {
   return (
-    <div className="hero-carousel">
+    <div className="carousel-container hero-slider">
       {offers && (
         <Slider {...heroSliderSettings}>
           {offers.slice(0, 5).map((offer, index) => (
             <div key={index}>
-              <Parallax y={[-28, 20]} tagOuter="figure">
-                <motion.img
-                  variants={zoomOut}
-                  src={offer.image[0].filePath}
-                  className="hero-image"
-                  alt={offer.make}
-                />
-              </Parallax>
+              <CSSTransition
+                in={true}
+                appear={true}
+                timeout={800}
+                classNames="zoomOut"
+              >
+                <Parallax y={[-28, 20]} tagOuter="figure">
+                  <img
+                    src={offer.image[0].filePath}
+                    className="hero-image"
+                    alt={offer.make}
+                  />
+                </Parallax>
+              </CSSTransition>
+
               <div className="slider-text__box">
                 <div className="slider-text__container">
                   <div className="slider-text__header slider-text__header--small">
-                    Top random offers
+                    Newest offers
                   </div>
-                  <Link
-                    className="slider-text__header slider-text__header--big"
-                    to={`/offer/${offer._id}`}
-                  >
-                    {offer.make.charAt(0).toUpperCase() + offer.make.slice(1)}{" "}
-                    {offer.model.charAt(0).toUpperCase() + offer.model.slice(1)}
+                  <Link className="" to={`/offer/${offer._id}`}>
+                    <div className="underline-header">
+                      <p>
+                        {offer.make.charAt(0).toUpperCase() +
+                          offer.make.slice(1)}{" "}
+                        {offer.model.charAt(0).toUpperCase() +
+                          offer.model.slice(1)}
+                      </p>
+                    </div>
                   </Link>
 
                   <div className="slider-text__details">

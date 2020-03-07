@@ -4,9 +4,9 @@
   align-content: center;
   flex-direction: column;
   border-radius: 16px;
-  margin: 2.5rem 0.7rem;
+  margin: 2.5rem 0;
   background: #fff;
-  width: 320px;
+  max-width: 450px;
   height: 300px;
   overflow: hidden;
   transition: all 0.2s ease-in-out;
@@ -55,6 +55,9 @@
     left: 8px;
     bottom: 16px;
     line-height: 1;
+    .fa-clock {
+      padding: 0 8px;
+    }
   }
   &__price {
     line-height: 1;

@@ -1,0 +1,35 @@
+.grid-px {
+  display: grid;
+  grid-template-columns: minmax(300px, 350px) minmax(900px, 1fr);
+  grid-gap: 200px;
+  position: relative;
+}
+
+.left-panel {
+  display: flex;
+  justify-content: center;
+}
+
+.right-panel {
+  max-width: 900px;
+}
+
+.left-panel:hover .text-dark,
+.right-panel:hover .text-dark {
+  transition: all 0.2s ease-in-out;
+  color: $primary-color;
+}
+
+.left-panel:hover .text-dark-secondary {
+  transition: all 0.2s ease-in-out;
+  color: $secondary-color;
+}
+
+.MuiExpansionPanelSummary-content {
+  margin: 0 !important;
+  margin-bottom: 12px !important;
+}
+
+.MuiExpansionPanelSummary-root.Mui-expanded {
+  min-height: 0 !important;
+}

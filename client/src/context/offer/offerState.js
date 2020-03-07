@@ -3,7 +3,7 @@ import axios from "axios";
 import OfferContext from "./offerContext";
 import OfferReducer from "./offerReducer";
 import {
-  GET_OFFERS,
+  GET_USER_OFFERS,
   GET_ALL_OFFERS,
   GET_SINGLE_OFFER,
   ADD_OFFER,
@@ -23,6 +23,7 @@ const OfferState = props => {
     userOffers: null,
     allOffers: null,
     offerDetails: null,
+    loading: true,
     current: null,
     uploadedFiles: [],
     error: null
@@ -31,11 +32,11 @@ const OfferState = props => {
 
   //Actions
   //Get user's offers
-  const getOffers = async () => {
+  const getUserOffers = async () => {
     try {
       const res = await axios.get("/api/offers");
       dispatch({
-        type: GET_OFFERS,
+        type: GET_USER_OFFERS,
         payload: res.data //user's offers data
       });
     } catch (error) {
@@ -43,13 +44,13 @@ const OfferState = props => {
         type: OFFER_ERROR,
         payload: error.response.msg
       });
+      console.log(error);
     }
   };
   // Get all users offers
   const getAllOffers = async () => {
     try {
       const res = await axios.get("/api/offers/main/all");
-
       dispatch({
         type: GET_ALL_OFFERS,
         payload: res.data
@@ -93,7 +94,6 @@ const OfferState = props => {
         payload: res.data
       });
     } catch (error) {
-      console.log(error);
       dispatch({ type: OFFER_ERROR, payload: error.response.msg });
     }
   };
@@ -114,8 +114,9 @@ const OfferState = props => {
     } catch (error) {
       dispatch({
         type: IMAGE_ERROR,
-        payload: error.response.data.msg
+        payload: error
       });
+      console.log(error);
     }
   };
 
@@ -189,9 +190,10 @@ const OfferState = props => {
         offerDetails: state.offerDetails,
         current: state.current,
         uploadedFiles: state.uploadedFiles,
+        loading: state.loading,
         error: state.error,
         //actions
-        getOffers,
+        getUserOffers,
         getAllOffers,
         getSingleOffer,
         addOffer,

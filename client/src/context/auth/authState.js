@@ -84,7 +84,6 @@ const AuthState = props => {
         type: LOGIN_SUCCESS,
         payload: res.data //token zarejestrowanego uzytkownika
       });
-
       loadUser();
     } catch (error) {
       dispatch({

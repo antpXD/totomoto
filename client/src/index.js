@@ -71,6 +71,8 @@ const theme = createMuiTheme({
           boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.1)"
         },
         "&$focused": {
+          backgroundColor: "transparent",
+          border: "2px solid #8a2be2",
           transition: "all .3s ease-in-out",
           boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.1)",
           transform: "translateY(-2px)"
@@ -89,6 +91,9 @@ const theme = createMuiTheme({
         fontWeight: "600",
         transition: "all .3s ease-in-out",
         borderRadius: 4,
+        "& .MuiFilledInput-underline:after": {
+          borderBottomColor: "green"
+        },
         "&:hover": {
           backgroundColor: "#f5f5f5",
           border: "2px solid #c4c4c4",
@@ -105,13 +110,12 @@ const theme = createMuiTheme({
     //Text Input Labels
     MuiInputLabel: {
       root: {
-        color: "#fff",
+        color: "#7E7E7E",
         fontFamily: '"Montserrat", sans-serif',
         fontWeight: "600",
         fontSize: ".9rem",
         "&$focused": {
-          color: "#8a2be2",
-          fontSize: "1rem"
+          color: "#8a2be2"
         },
         "&$outlined": {
           fontWeight: "600",
@@ -287,16 +291,16 @@ const theme = createMuiTheme({
         boxShadow: "none",
         transition: "all .2s ease-in-out",
         "&$contained": {
-          width: "180px",
+          width: "150px",
           height: "50px",
-          borderRadius: 0,
-          backgroundColor: "white",
-          color: "black",
+          borderRadius: 4,
+          backgroundColor: "#F16262",
+          color: "white",
           fontWeight: "600",
           "&:hover": {
             transition: "all .2s ease-in-out",
-            boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.25)"
-            // background: "#8a2be2"
+            boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.25)",
+            background: "#fa3a3a"
           }
         },
         "&$outlined": {

@@ -6,10 +6,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 12vh;
-  z-index: 1;
+  height: 100px;
   max-width: 1450px;
   margin: auto;
+  padding: 0 30px;
   font-size: 1rem;
   z-index: 99;
 }
@@ -45,15 +45,14 @@
 
 .logo {
   position: relative;
-  opacity: 0.7;
-  transition: all 0.3s ease-in-out;
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
   &:hover {
-    opacity: 0.9;
-    transition: all 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
   }
   &:hover .logo__svg {
     transform: rotate(30deg);
-    transition: all 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
   }
   &__svg {
     fill: $white-color;
@@ -98,25 +97,15 @@
 }
 
 /* Mobile Styles */
-@media (max-width: 700px) {
-  .hide-sm {
-    display: none;
+@media (max-width: 600px) {
+  .logo {
+    &__text {
+      display: none;
+    }
   }
-
-  .grid-2,
-  .grid-3,
-  .grid-4 {
-    grid-template-columns: 1fr;
-  }
-
-  /* Navbar */
-  .navbar {
-    display: block;
-    text-align: center;
-  }
-
-  .navbar ul {
-    text-align: center;
-    justify-content: center;
+  .logout-btn {
+    p {
+      display: none;
+    }
   }
 }

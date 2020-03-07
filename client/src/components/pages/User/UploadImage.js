@@ -88,6 +88,7 @@ const UploadImage = ({ setFiles, files, isUploaded, setIsUploaded }) => {
   };
 
   const thumbs = files.map(file => (
+    // <CSSTransition key={file.name} timeout={500} classNames="page">
     <div key={file.name} className="thumbs__thumb" onClick={removeFile(file)}>
       <img src={file.preview} className="thumbs__image" alt={file.name} />
       <div className="thumbs__image-overlay">
@@ -98,6 +99,7 @@ const UploadImage = ({ setFiles, files, isUploaded, setIsUploaded }) => {
         </div>
       </div>
     </div>
+    // </CSSTransition>
   ));
 
   useEffect(

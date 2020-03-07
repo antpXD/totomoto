@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { slideOut } from "../../../animations/animations";
+import React, { useContext, useState } from "react";
+import { CSSTransition } from "react-transition-group";
 import HomeCarousel from "./HomeCarousel";
 import HomeOfferList from "./HomeOfferList";
 import HomeFilters from "./HomeFilters";
@@ -12,13 +11,6 @@ import useDebounce from "../../../utils/useDebounceHook";
 const FilterFunctions = ({ allOffers }) => {
   const offerContext = useContext(OfferContext);
   const { loading } = offerContext;
-
-  // useEffect(() => {
-  //   getAllOffers();
-  //   authContext.loadUser();
-
-  //   //eslint-disable-next-line
-  // }, []);
 
   const maxValues = {
     maxPrice: Math.max.apply(
@@ -46,6 +38,39 @@ const FilterFunctions = ({ allOffers }) => {
       })
     ),
     maxEnginePower: Math.max.apply(
+      Math,
+      allOffers.map(o => {
+        return o.enginePower;
+      })
+    )
+  };
+
+  const minValues = {
+    minPrice: Math.min.apply(
+      Math,
+      allOffers.map(o => {
+        return o.price;
+      })
+    ),
+    minYear: Math.min.apply(
+      Math,
+      allOffers.map(o => {
+        return o.year;
+      })
+    ),
+    minMileage: Math.min.apply(
+      Math,
+      allOffers.map(o => {
+        return o.mileage;
+      })
+    ),
+    minEngineSize: Math.min.apply(
+      Math,
+      allOffers.map(o => {
+        return o.engineSize;
+      })
+    ),
+    minEnginePower: Math.min.apply(
       Math,
       allOffers.map(o => {
         return o.enginePower;
@@ -83,29 +108,29 @@ const FilterFunctions = ({ allOffers }) => {
     // error: null
   };
 
-  const [passingTags, setPassingTags] = useState(INITIAL_STATE);
-  const { enginePower, engineSize, year, mileage, price } = passingTags;
+  const [criteria, setCriteria] = useState(INITIAL_STATE);
+  const { enginePower, engineSize, year, mileage, price, search } = criteria;
 
   const debounced = useDebounce(
-    { enginePower, engineSize, year, mileage, price },
+    { enginePower, engineSize, year, mileage, price, search },
     500
   );
 
   //Handling filtering from different inputs
   const handleInputFilter = (filterProp, name) => e => {
-    setPassingTags({
-      ...passingTags,
+    setCriteria({
+      ...criteria,
       [filterProp]: {
-        ...passingTags[filterProp],
+        ...criteria[filterProp],
         [name]: e.target.value
       }
     });
   };
   const handleCheckboxFilter = (filterProp, name) => e => {
-    setPassingTags({
-      ...passingTags,
+    setCriteria({
+      ...criteria,
       [filterProp]: {
-        ...passingTags[filterProp],
+        ...criteria[filterProp],
         [name]: e.target.checked
       }
     });
@@ -114,47 +139,47 @@ const FilterFunctions = ({ allOffers }) => {
   //handling slider with input
   const handleSliderFilter = name => (event, newValue) => {
     event.preventDefault();
-    setPassingTags({
-      ...passingTags,
+    setCriteria({
+      ...criteria,
       [name]: newValue
     });
   };
   const handleSliderInputMin = name => event => {
-    setPassingTags({
-      ...passingTags,
+    setCriteria({
+      ...criteria,
       [name]: [
         event.target.value === "" ? "" : Number(event.target.value),
-        passingTags[name][1]
+        criteria[name][1]
       ]
     });
   };
   const handleSliderInputMax = name => event => {
-    setPassingTags({
-      ...passingTags,
+    setCriteria({
+      ...criteria,
       [name]: [
-        passingTags[name][0],
+        criteria[name][0],
         event.target.value === "" ? "" : Number(event.target.value)
       ]
     });
   };
   const handleSliderBlur = name => {
-    if (passingTags[name][0] < 0) {
-      setPassingTags({
-        ...passingTags,
-        [name]: [0, passingTags[name][1]]
+    if (criteria[name][0] < 0) {
+      setCriteria({
+        ...criteria,
+        [name]: [0, criteria[name][1]]
       });
     }
   };
 
-  //actuall filtering
-  const filteredCollected = () => {
+  // collects ALL keys that have true as a value, then create a new obj to compare to filter.
+  const collectedCriteria = () => {
     const collectedTrueKeys = {
       bodyType: [],
       condition: [],
       fuelType: []
     };
 
-    const { bodyType, condition, fuelType } = passingTags;
+    const { bodyType, condition, fuelType } = criteria;
     for (let bodyTypeKey in bodyType) {
       if (bodyType[bodyTypeKey]) collectedTrueKeys.bodyType.push(bodyTypeKey);
     }
@@ -187,16 +212,16 @@ const FilterFunctions = ({ allOffers }) => {
   };
 
   const searchOffers = () => {
-    const filteredOffers = multiPropsFilter(allOffers, filteredCollected());
+    const filteredOffers = multiPropsFilter(allOffers, collectedCriteria());
 
     return filteredOffers.filter(offer => {
       return (
         offer.make
           .toLowerCase()
-          .includes(passingTags.search.make.toLowerCase()) &&
+          .includes(debounced.search.make.toLowerCase()) &&
         offer.model
           .toLowerCase()
-          .includes(passingTags.search.model.toLowerCase()) &&
+          .includes(debounced.search.model.toLowerCase()) &&
         offer.price >= debounced.price[0] &&
         offer.price <= debounced.price[1] &&
         offer.year >= debounced.year[0] &&
@@ -211,12 +236,6 @@ const FilterFunctions = ({ allOffers }) => {
     });
   };
 
-  // displays filtered offers
-  useEffect(() => {
-    allOffers && searchOffers();
-    // eslint-disable-next-line
-  }, [passingTags]);
-
   return (
     <>
       {allOffers !== null && !loading ? (
@@ -227,42 +246,48 @@ const FilterFunctions = ({ allOffers }) => {
         <Spinner />
       )}
       <Parallax className="custom-class" y={[-200, 200]} tagOuter="figure">
-        <motion.div
-          className="round-container round-container--hero"
-          variants={slideOut}
+        <CSSTransition
+          in={true}
+          appear={true}
+          timeout={800}
+          classNames="slideOut"
         >
-          <div className="container">
-            <div className="grid-2 grid-px">
-              <div className="left-panel__container">
-                <HomeFilters
-                  handleCheckboxFilter={handleCheckboxFilter}
-                  handleInputFilter={handleInputFilter}
-                  handleSliderFilter={handleSliderFilter}
-                  handleSliderInputMin={handleSliderInputMin}
-                  handleSliderInputMax={handleSliderInputMax}
-                  handleSliderBlur={handleSliderBlur}
-                  passingTags={passingTags}
-                  maxValues={maxValues}
-                />
-              </div>
-              <div className="right-panel__container">
-                <div className="flex-row">
-                  <h1 className="section-title">
-                    <span className="text-light">All</span>
-                    <span className="text-dark">offers</span>
-                  </h1>
+          <div className="round-container round-container--hero">
+            <div className="container">
+              <div className="grid-px">
+                <div className="left-panel">
+                  <HomeFilters
+                    handleCheckboxFilter={handleCheckboxFilter}
+                    handleInputFilter={handleInputFilter}
+                    handleSliderFilter={handleSliderFilter}
+                    handleSliderInputMin={handleSliderInputMin}
+                    handleSliderInputMax={handleSliderInputMax}
+                    handleSliderBlur={handleSliderBlur}
+                    criteria={criteria}
+                    maxValues={maxValues}
+                    minValues={minValues}
+                  />
                 </div>
-                {allOffers !== null && searchOffers !== null && !loading ? (
-                  <>
-                    <HomeOfferList filteredOffers={searchOffers()} />
-                  </>
-                ) : (
-                  <Spinner />
-                )}
+
+                <div className="right-panel">
+                  <div className="flex-row">
+                    <h1 className="section-title p-bottom__24">
+                      <span className="text-light">All</span>
+                      <span className="text-dark">offers</span>
+                    </h1>
+                  </div>
+                  {allOffers !== null && searchOffers !== null && !loading ? (
+                    <>
+                      <HomeOfferList filteredOffers={searchOffers()} />
+                    </>
+                  ) : (
+                    <Spinner />
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </motion.div>
+        </CSSTransition>
       </Parallax>
     </>
   );

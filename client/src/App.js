@@ -1,6 +1,5 @@
 import React from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import Navbar from "./components/layout/Navbar";
@@ -25,13 +24,6 @@ import { ParallaxProvider } from "react-scroll-parallax";
 
 setAuthToken(localStorage.token);
 
-const routes = [
-  { path: "/", name: "Home", Component: Home },
-  { path: "/offer/:id", name: "About", Component: OfferDetails },
-  { path: "/login", name: "Login", Component: Login },
-  { path: "/about", name: "About", Component: About }
-];
-
 const App = () => {
   const location = useLocation();
 
@@ -42,7 +34,6 @@ const App = () => {
           <Alerts />
           <Navbar />
           <ParallaxProvider>
-            {/* <AnimatePresence exitBeforeEnter> */}
             <TransitionGroup>
               <CSSTransition
                 key={location.pathname}
@@ -59,7 +50,6 @@ const App = () => {
                 </Switch>
               </CSSTransition>
             </TransitionGroup>
-            {/* </AnimatePresence> */}
           </ParallaxProvider>
         </AlertState>
       </OfferState>

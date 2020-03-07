@@ -8,7 +8,7 @@ import ConfirmDialog from "../../layout/ConfirmDialog";
 import { IconButton, Menu, MenuItem } from "@material-ui/core/";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
-const UserOfferItem = ({ offer }) => {
+const UserOfferItem = ({ offer, toggle, onEditToggle }) => {
   const offerContext = useContext(OfferContext);
   const { deleteOffer, setCurrent, clearCurrent } = offerContext;
 
@@ -27,6 +27,7 @@ const UserOfferItem = ({ offer }) => {
   };
 
   const onEdit = () => {
+    onEditToggle();
     setCurrent(offer);
     handleClose();
   };
@@ -37,6 +38,9 @@ const UserOfferItem = ({ offer }) => {
   };
 
   const dateFormat = require("dateformat");
+
+  const formatedMake = make.charAt(0).toUpperCase() + make.slice(1);
+  const formatedModel = model.charAt(0).toUpperCase() + model.slice(1);
 
   return (
     <div className="card-small">
@@ -56,9 +60,15 @@ const UserOfferItem = ({ offer }) => {
         <div>
           <div className="card-small__header">
             <Link to={`/offer/${_id}`}>
-              <h2 className="header-text">
-                {make.charAt(0).toUpperCase() + make.slice(1)}{" "}
-                {model.charAt(0).toUpperCase() + model.slice(1)}
+              <h2
+                className="header-text"
+                style={
+                  formatedMake.length + formatedModel.length > 14
+                    ? { fontSize: "22px", paddingTop: 4 }
+                    : null
+                }
+              >
+                {formatedMake} {formatedModel}
               </h2>
             </Link>
             <div className="card-small__actions">

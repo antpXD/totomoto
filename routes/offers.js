@@ -10,7 +10,7 @@ const Offer = require("../model/Offer");
 //CREATING HTTP ROUTES/REQUESTS
 
 //@route    GET api/offers
-//@desc     Get all users offers
+//@desc     Get users offers
 //@access   Private
 //    we use middleware in private access by passing it as a second parameter
 router.get("/", auth, async (req, res) => {
@@ -20,7 +20,7 @@ router.get("/", auth, async (req, res) => {
     });
     res.json(offers);
   } catch (err) {
-    console.log(err.message);
+    console.log(err);
     res.status(500).send("Server Error");
   }
 });

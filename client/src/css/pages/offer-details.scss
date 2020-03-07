@@ -1,7 +1,35 @@
+.details-page-container {
+  width: 1450px;
+  // min-width: 900px;
+  border-radius: 40px;
+  background-color: white;
+  margin: 120px;
+}
+
 .details-container {
-  // width: 90%;
-  margin: 16px 0;
-  min-height: 50vh;
+  max-width: 1550px;
+  margin: auto;
+  padding: 150px 100px 0 100px;
+}
+
+.parameters-container {
+  display: flex;
+  padding-top: 16px;
+  width: 100%;
+}
+
+.details-title {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.row1 {
+  min-width: 300px;
+}
+
+.row2 {
+  min-width: 400px;
+  padding-left: 150px;
 }
 
 .space-between {
@@ -9,6 +37,7 @@
   justify-content: space-between;
 }
 
+// details list
 .detail-left-item {
   width: 100%;
   border-bottom: 1px solid #c9c9c9;

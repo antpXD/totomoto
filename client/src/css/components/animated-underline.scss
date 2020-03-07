@@ -1,0 +1,73 @@
+// add offer upload buttons
+.underline {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  color: #fff;
+  background-color: #000;
+  font-family: $font-header;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.underline > p {
+  position: relative;
+}
+
+.underline > p::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+.underline p:hover::before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+// main header yellow text
+.underline-header {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  font-family: $font-header;
+  color: #fff500;
+  font-weight: bold;
+  line-height: 1.2;
+  font-size: 48px;
+  cursor: pointer;
+}
+
+.underline-header > p {
+  position: relative;
+}
+
+.underline-header > p::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  bottom: 0;
+  left: 0;
+  background-color: #fff500;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
+}
+.underline-header p:hover::before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}

@@ -28,17 +28,18 @@ const HomeOfferItem = ({ offer }) => {
           className="card__image"
         />
       </Link>
+
       <div className="card__details">
         <div>
           <div className="card__header">
             <Link to={`/offer/${offer._id}`}>
-              <h2 className="header-text">
+              <h2>
                 {make.charAt(0).toUpperCase() + make.slice(1)}{" "}
                 {model.charAt(0).toUpperCase() + model.slice(1)}
               </h2>
             </Link>
             <div className="card__follow">
-              Follow
+              <p>Follow</p>
               <i className="far fa-star" />
             </div>
           </div>
@@ -57,11 +58,13 @@ const HomeOfferItem = ({ offer }) => {
             </Tooltip>
           </div>
         </div>
-        <div>
-          <i className="far fa-clock" />
-          {dateFormat(date, "dS mmmm")}
+        <div className="flex-row" style={{ justifyContent: "space-between" }}>
+          <div className="card__date">
+            <i className="far fa-clock" />
+            <p>{dateFormat(date, "dS mmmm")}</p>
+          </div>
+          <div className="card__price">${price}</div>
         </div>
-        <div className="card__price">${price}</div>
       </div>
     </div>
   );

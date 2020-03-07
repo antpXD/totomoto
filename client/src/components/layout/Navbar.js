@@ -33,7 +33,7 @@ const Navbar = () => {
     <>
       <li className="all-center">
         <button className="logout-btn" onClick={handleClick}>
-          {user && user.name}
+          <p>{user && user.name}</p>
           <i className="far fa-user" />
         </button>
         <Menu
@@ -68,9 +68,6 @@ const Navbar = () => {
     <>
       <li>
         <Link to="/login">Login</Link>
-      </li>
-      <li>
-        <Link to="/register">Register</Link>
       </li>
     </>
   );

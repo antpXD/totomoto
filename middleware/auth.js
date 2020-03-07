@@ -1,4 +1,4 @@
-//just a function that has an access to reqest and response cycle and object
+//a function that has an access to reqest and response cycle and object
 
 const jwt = require("jsonwebtoken");
 const config = require("config");
@@ -14,7 +14,6 @@ module.exports = function(req, res, next) {
 
   try {
     //if there is a token - we pull out the payload (which is in decoded)
-    //(config.get to jest secret potrzebny w tokenie, ktory jest w default.json)
     const decoded = jwt.verify(token, config.get("jwtSecret"));
     //set user that is in payload (in decoded variable) to request.user, so that we will have an access to this inside the route - route.post(... asyns (req, res))
     req.user = decoded.user;

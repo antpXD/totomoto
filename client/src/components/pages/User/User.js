@@ -1,61 +1,68 @@
 import React, { useContext, useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { slideIn } from "../../../animations/animations";
 import UserOfferList from "./UserOfferList";
 import AddOffer from "./AddOffer";
 import AuthContext from "../../../context/auth/authContext";
 import OfferContext from "../../../context/offer/offerContext";
-
-const variants = {
-  open: { opacity: 1, x: 0 },
-  closed: { opacity: 0, x: "-100%" }
-};
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const User = () => {
   const authContext = useContext(AuthContext);
+  const { loadUser, user } = authContext;
+
   const offerContext = useContext(OfferContext);
 
   useEffect(() => {
-    authContext.loadUser();
-    if (offerContext.uploadedFiles === null) {
-      window.location.reload();
-    }
+    loadUser();
+    window.scrollTo(0, 0);
+    offerContext.getUserOffers();
     // eslint-disable-next-line
   }, []);
 
-  const [addOffer, setAddOffer] = useState(false);
-
-  const toggle = () => setAddOffer(!addOffer);
+  const [showAddOffer, setShowAddOffer] = useState(false);
+  const toggle = () => {
+    // uploadedFilles bug
+    offerContext.uploadedFiles !== null
+      ? setShowAddOffer(!showAddOffer)
+      : window.location.reload();
+  };
+  const onEditToggle = () => showAddOffer === false && setShowAddOffer(true);
 
   return (
-    <motion.div
-      className="wrapper"
-      exit={{ opacity: 0 }}
-      initial="initial"
-      animate="animate"
-    >
-      <div className="header-section">
-        <h1 className="header-section__text">Hi, Piotrek.</h1>
-        <div className="add-offer__animated-button" onClick={toggle}>
-          <div className="animated-button-content">add offer</div>
+    <div className="wrapper">
+      <CSSTransition in={true} appear={true} timeout={500} classNames="zoomIn">
+        <div className="header-section">
+          <h1 className="header-section__text">Hi, {user && user.name}.</h1>
+          <div className="add-offer__animated-button" onClick={toggle}>
+            <div className="animated-button-content">
+              {!showAddOffer ? "add offer" : "close"}
+            </div>
+          </div>
         </div>
-      </div>
+      </CSSTransition>
 
-      {addOffer && (
-        <AnimatePresence exitBeforeEnter>
-          <motion.div
-            animate={addOffer ? "open" : "closed"}
-            variants={variants}
-            exit={{ opacity: 0 }}
+      <TransitionGroup>
+        {showAddOffer && (
+          <CSSTransition
+            in={showAddOffer}
+            appear={false}
+            timeout={800}
+            classNames="fadeIn"
           >
-            <AddOffer />
-          </motion.div>
-        </AnimatePresence>
-      )}
-      <motion.div variants={slideIn}>
-        <UserOfferList />
-      </motion.div>
-    </motion.div>
+            <AddOffer toggle={toggle} />
+          </CSSTransition>
+        )}
+
+        <CSSTransition
+          in={showAddOffer ? showAddOffer : true}
+          appear={true}
+          // onEnter
+          timeout={800}
+          classNames="slideIn"
+        >
+          <UserOfferList toggle={toggle} onEditToggle={onEditToggle} />
+        </CSSTransition>
+      </TransitionGroup>
+    </div>
   );
 };
 

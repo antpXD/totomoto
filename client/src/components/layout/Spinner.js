@@ -6,10 +6,11 @@ const useStyles = makeStyles(theme => ({
   root: {
     position: "absolute",
     top: 0,
-    left: 0,
-    right: 0
+    left: 30,
+    right: 30
   },
   bar: {
+    borderRadius: 50,
     height: 4,
     boxShadow: "0px 3px 15px rgba(0, 0, 0, 0.2)"
   }

@@ -1,5 +1,5 @@
 import {
-  GET_OFFERS,
+  GET_USER_OFFERS,
   GET_ALL_OFFERS,
   GET_SINGLE_OFFER,
   ADD_OFFER,
@@ -16,7 +16,7 @@ import {
 
 export default (state, action) => {
   switch (action.type) {
-    case GET_OFFERS:
+    case GET_USER_OFFERS:
       return {
         ...state,
         userOffers: action.payload,
@@ -57,6 +57,7 @@ export default (state, action) => {
     case CLEAR_OFFERS:
       return {
         ...state,
+        loading: false,
         userOffers: null,
         allOffers: null,
         uploadedFiles: null,

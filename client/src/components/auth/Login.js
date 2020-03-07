@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { slideIn } from "../../animations/animations";
+import { CSSTransition } from "react-transition-group";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
+import loginBG from "../../images/login.jpg";
+import registerBG from "../../images/register.jpg";
 
 import AuthContext from "../../context/auth/authContext";
 import AlertContext from "../../context/alert/alertContext";
@@ -52,6 +53,7 @@ const Login = props => {
     isAuthenticated
   } = authContext;
 
+  //checks if login form or register form
   const [login, setLogin] = useState(true);
 
   useEffect(() => {
@@ -85,35 +87,57 @@ const Login = props => {
 
   const loginForm = (
     <form onSubmit={handleSubmit(onLogin)}>
-      <ValidationInput
-        error={errors.email ? true : false}
-        label="EMAIL"
-        className={clsx(classes.textField, errors.email && classes.borders)}
-        name="email"
-        inputRef={register({
-          pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
-        })}
-      />
-      <PasswordInput
-        error={errors.password ? true : false}
-        label="PASSWORD"
-        className={clsx(classes.textField, errors.password && classes.borders)}
-        name="password"
-        inputRef={register({ required: true, minLength: 4 })}
-      />
-      <div className="auth-section__actions">
-        <Button
-          variant="contained"
-          type="submit"
-          className={classes.submitButton}
-        >
-          Log in! <i className="fas fa-chevron-right" />
-        </Button>
-        <Link to="/register" className="auth-section__actions--text flex-row">
-          You don't have an account?
-          <span style={{ fontWeight: 800, paddingLeft: 8 }}>Sign up!</span>
-        </Link>
-      </div>
+      <CSSTransition in={true} appear={true} timeout={900} classNames="login-1">
+        <ValidationInput
+          error={errors.email ? true : false}
+          label="EMAIL"
+          className={clsx(classes.textField, errors.email && classes.borders)}
+          name="email"
+          inputRef={register({
+            pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+          })}
+        />
+      </CSSTransition>
+      <CSSTransition
+        in={true}
+        appear={true}
+        timeout={1100}
+        classNames="login-2"
+      >
+        <PasswordInput
+          error={errors.password ? true : false}
+          label="PASSWORD"
+          className={clsx(
+            classes.textField,
+            errors.password && classes.borders
+          )}
+          name="password"
+          inputRef={register({ required: true, minLength: 4 })}
+        />
+      </CSSTransition>
+      <CSSTransition
+        in={true}
+        appear={true}
+        timeout={1400}
+        classNames="login-3"
+      >
+        <div className="auth-section__actions">
+          <Button
+            variant="contained"
+            type="submit"
+            className={classes.submitButton}
+          >
+            Log in! <i className="fas fa-chevron-right" />
+          </Button>
+          <div
+            className="auth-section__actions--text flex-row"
+            onClick={() => setLogin(false)}
+          >
+            You don't have an account?
+            <span style={{ fontWeight: 800, paddingLeft: 8 }}>Sign up!</span>
+          </div>
+        </div>
+      </CSSTransition>
     </form>
   );
 
@@ -142,65 +166,79 @@ const Login = props => {
         name="password"
         inputRef={register({ required: true, minLength: 4 })}
       />
-
-      <div className="form-section__actions">
+      <div className="auth-section__actions">
         <Button
           variant="contained"
           type="submit"
           className={classes.submitButton}
         >
-          Sign in! <i className="fas fa-chevron-right" />
+          Sign up! <i className="fas fa-chevron-right" />
         </Button>
-        <Link to="/login" className="form-section__actions--text flex-row">
-          Already registered?
+        <div
+          className="auth-section__actions--text flex-row"
+          onClick={() => setLogin(true)}
+        >
+          You already have an account?
           <span style={{ fontWeight: 800, paddingLeft: 8 }}>Log in!</span>
-        </Link>
+        </div>
       </div>
     </form>
   );
 
   return (
-    <motion.div
-      className="wrapper"
-      exit={{ opacity: 0 }}
-      initial="initial"
-      animate="animate"
-    >
-      <div className="header-section">
-        <div onClick={() => setLogin(!login)}>
-          <h1
-            className={
-              login
-                ? "header-section__text"
-                : "header-section__text header-section__text--darker"
-            }
-          >
-            login.
-            <span className="header-section__text header-section__text--darker">
-              {" "}
-              /{" "}
-            </span>
-            <span
+    <div className="wrapper">
+      <img
+        alt=""
+        src={login ? loginBG : registerBG}
+        style={{
+          position: "absolute",
+          height: "100vh",
+          filter: "brightness(15%)",
+          objectFit: "cover"
+        }}
+      />
+      <CSSTransition in={true} appear={true} timeout={500} classNames="zoomIn">
+        <div className="header-section header-section--bg">
+          <div onClick={() => setLogin(!login)}>
+            <h1
               className={
-                !login
+                login
                   ? "header-section__text"
                   : "header-section__text header-section__text--darker"
               }
             >
-              register.
-            </span>
-          </h1>
+              login.
+              <span className="header-section__text header-section__text--darker">
+                {" "}
+                /{" "}
+              </span>
+              <span
+                className={
+                  !login
+                    ? "header-section__text"
+                    : "header-section__text header-section__text--darker"
+                }
+              >
+                register.
+              </span>
+            </h1>
+          </div>
         </div>
-      </div>
-      <motion.div
-        className="round-container round-container--generic"
-        variants={slideIn}
+      </CSSTransition>
+      <CSSTransition
+        in={true}
+        appear={true}
+        // onEnter
+        timeout={1000}
+        classNames="slideIn"
       >
-        <div className="auth-section__container">
-          {login ? loginForm : registerForm}
+        <div className="round-container">
+          <div className="auth-section__container">
+            {login ? loginForm : registerForm}
+          </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </CSSTransition>
+    </div>
   );
 };
 

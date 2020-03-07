@@ -16,10 +16,7 @@ const HomeOfferList = ({ filteredOffers }) => {
   return (
     <>
       {filteredOffers && !loading ? (
-        filteredOffers.map(offer => (
-          // fade fires when offers are loaded
-          <OfferItem offer={offer} key={offer._id} />
-        ))
+        filteredOffers.map(offer => <OfferItem offer={offer} key={offer._id} />)
       ) : (
         <Spinner />
       )}

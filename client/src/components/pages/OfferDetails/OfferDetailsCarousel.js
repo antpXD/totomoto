@@ -34,10 +34,8 @@ const bigSliderSettings = {
 };
 
 const smallSliderSettings = {
-  vertical: true,
-  verticalSwiping: true,
   speed: 500,
-  slidesToShow: 4,
+  slidesToShow: 5,
   infinite: true,
   swipeToSlide: true,
   focusOnSelect: true

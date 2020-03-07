@@ -41,9 +41,9 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+// html {
+//   scroll-behavior: smooth;
+// }
 
 body {
   font-family: $font-default;
@@ -86,24 +86,31 @@ button:active {
   background-color: transparent !important;
 }
 
+.MuiInputBase-formControl::before {
+  border-bottom: 1px solid transparent;
+}
+
+// wrapps each page
 .wrapper {
   position: absolute;
   width: 100%;
 }
 
 .container {
-  width: 1450px;
+  max-width: 1550px;
   margin: auto;
+  padding: 0 50px;
 }
 
 .round-container {
   position: absolute;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
   left: 0;
   right: 0;
   background: $white-color;
-  padding: 100px 0;
+  padding: 80px 0 0 0;
+  min-height: 52.5vh;
   z-index: 99;
   &--hero {
     top: -25px;
@@ -113,12 +120,15 @@ button:active {
 .header-section {
   height: 450px;
   position: relative;
-  background-color: black;
+  background: black;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   z-index: 0;
+  &--bg {
+    background: transparent;
+  }
 }
 
 .header-section__text {
@@ -133,53 +143,6 @@ button:active {
     transition: all cubic-bezier(0.6, -0.28, 0.735, 0.045) 0.3s;
     color: rgba(255, 255, 255, 0.39);
   }
-}
-
-.left-panel {
-  height: 100vh;
-  position: relative;
-  overflow-y: scroll;
-  overflow: auto;
-  color: rgba(0, 0, 0, 0);
-  transition: color 0.3s ease;
-  background: #fff;
-
-  &:hover {
-    color: rgba(0, 0, 0, 0.3);
-  }
-  &__container {
-    display: flex;
-    justify-content: center;
-    color: rgba(0, 0, 0, 1);
-  }
-}
-
-.right-panel {
-  height: 100vh;
-  border-radius: 3px;
-  overflow: auto;
-  overflow-x: hidden;
-  color: rgba(0, 0, 0, 0);
-  transition: color 0.3s ease;
-  &:hover {
-    color: rgba(0, 0, 0, 0.3);
-  }
-  &__container {
-    color: rgba(0, 0, 0, 1);
-    max-width: 900px;
-    min-height: 1400px;
-  }
-}
-
-.left-panel:hover .text-dark,
-.right-panel:hover .text-dark {
-  transition: all 0.2s ease-in-out;
-  color: $primary-color;
-}
-
-.left-panel:hover .text-dark-secondary {
-  transition: all 0.2s ease-in-out;
-  color: $secondary-color;
 }
 
 // positioning
@@ -211,6 +174,11 @@ button:active {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .relative {
@@ -250,26 +218,5 @@ button:active {
   }
   &__24 {
     padding-left: 24px;
-  }
-}
-
-// grid
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  position: relative;
-}
-
-.grid-px {
-  grid-template-columns: 350px 1fr;
-  grid-gap: 200px;
-}
-
-.grid-gap {
-  &__200 {
-    grid-gap: 200px;
-  }
-  &__100 {
-    grid-gap: 100px;
   }
 }
