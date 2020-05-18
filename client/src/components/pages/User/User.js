@@ -4,6 +4,7 @@ import AddOffer from "./AddOffer";
 import AuthContext from "../../../context/auth/authContext";
 import OfferContext from "../../../context/offer/offerContext";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import Spinner from "../../layout/Spinner";
 
 const User = () => {
   const authContext = useContext(AuthContext);
@@ -21,11 +22,13 @@ const User = () => {
   const [showAddOffer, setShowAddOffer] = useState(false);
   const toggle = () => {
     // uploadedFilles bug
-    offerContext.uploadedFiles !== null
-      ? setShowAddOffer(!showAddOffer)
-      : window.location.reload();
+    setShowAddOffer(!showAddOffer);
   };
   const onEditToggle = () => showAddOffer === false && setShowAddOffer(true);
+
+  if (offerContext.uploadedFiles === null) {
+    return <Spinner />;
+  }
 
   return (
     <div className="wrapper">

@@ -20,29 +20,29 @@ import {
   RadioGroup,
   FormControlLabel,
   FormLabel,
-  makeStyles
+  makeStyles,
 } from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   marginTop: {
     marginTop: theme.spacing(5),
-    minWidth: 120
+    minWidth: 120,
   },
   marginLeft: {
-    marginLeft: theme.spacing(2)
+    marginLeft: theme.spacing(2),
   },
   marginRight: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   lightColor: {
-    color: "#B7B7B7"
+    color: "#B7B7B7",
   },
   addOfferButton: {
-    width: "180px"
+    width: "180px",
   },
   editOfferButton: {
-    width: "180px"
-  }
+    width: "180px",
+  },
 }));
 
 const AddOffer = ({ toggle }) => {
@@ -63,7 +63,7 @@ const AddOffer = ({ toggle }) => {
     current,
     clearCurrent,
     uploadedFiles,
-    clearImage
+    clearImage,
   } = offerContext;
 
   const INITIAL_STATE = {
@@ -79,7 +79,7 @@ const AddOffer = ({ toggle }) => {
     mileage: "",
     price: "",
     description: "",
-    email: userEmail
+    email: userEmail,
   };
 
   useEffect(() => {
@@ -87,10 +87,10 @@ const AddOffer = ({ toggle }) => {
       uploadedFiles.length > 0
         ? SetOffer({
             ...current,
-            image: uploadedFiles
+            image: uploadedFiles,
           })
         : SetOffer({
-            ...current
+            ...current,
           });
     } else {
       SetOffer(INITIAL_STATE);
@@ -115,13 +115,13 @@ const AddOffer = ({ toggle }) => {
     engineSize,
     enginePower,
     condition,
-    description
+    description,
   } = offer;
 
-  const onChange = e => {
+  const onChange = (e) => {
     SetOffer({
       ...offer,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -132,7 +132,7 @@ const AddOffer = ({ toggle }) => {
     return true;
   }
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     if (!isEmpty(offer)) {
       setAlert("Fill in all fields", "error");
@@ -200,7 +200,7 @@ const AddOffer = ({ toggle }) => {
                 onChange={onChange}
                 inputProps={{
                   name: "bodyType",
-                  id: "body-type"
+                  id: "body-type",
                 }}
               >
                 <MenuItem disabled value="">
@@ -267,7 +267,7 @@ const AddOffer = ({ toggle }) => {
                 onChange={onChange}
                 inputProps={{
                   name: "fuelType",
-                  id: "fuel-type"
+                  id: "fuel-type",
                 }}
               >
                 <MenuItem disabled value="">

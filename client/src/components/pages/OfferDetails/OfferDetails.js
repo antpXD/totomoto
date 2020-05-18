@@ -5,6 +5,7 @@ import Spinner from "../../layout/Spinner";
 import Footer from "../../layout/Footer";
 import OfferDetailsCarousel from "./OfferDetailsCarousel";
 
+
 const OfferDetails = ({ match }) => {
   const offerContext = useContext(OfferContext);
   const { getSingleOffer, offerDetails, loading } = offerContext;
