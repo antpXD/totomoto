@@ -19,19 +19,19 @@ const dropzone = {
   color: "#cfcfcf",
   outline: "0",
   transition: "border .24s ease-in-out",
-  cursor: "pointer"
+  cursor: "pointer",
 };
 
 const activeStyle = {
-  borderColor: "#2196f3"
+  borderColor: "#2196f3",
 };
 
 const acceptStyle = {
-  borderColor: "#00e676"
+  borderColor: "#00e676",
 };
 
 const rejectStyle = {
-  borderColor: "#ff1744"
+  borderColor: "#ff1744",
 };
 
 const UploadImage = ({ setFiles, files, isUploaded, setIsUploaded }) => {
@@ -43,7 +43,7 @@ const UploadImage = ({ setFiles, files, isUploaded, setIsUploaded }) => {
 
   // i dont know why it doesnt work without this
   // eslint-disable-next-line
-  const previewFiles = files.map(file =>
+  const previewFiles = files.map((file) =>
     Object.assign(file, { preview: URL.createObjectURL(file) })
   );
 
@@ -52,42 +52,44 @@ const UploadImage = ({ setFiles, files, isUploaded, setIsUploaded }) => {
     getInputProps,
     isDragActive,
     isDragAccept,
-    isDragReject
+    isDragReject,
   } = useDropzone({
     accept: "image/*",
-    onDrop: acceptedFiles => {
+    onDrop: (acceptedFiles) => {
       // files that are already dropped (in the files state)
-      const prevFiles = files.map(file =>
+      const prevFiles = files.map((file) =>
         Object.assign(file, { preview: URL.createObjectURL(file) })
       );
       // previous files + files that are being dropped
       const allFiles = [...prevFiles, ...acceptedFiles];
       setFiles(
         allFiles.map(
-          file =>
-            new File([file], `${+new Date()}_${file.size}`, { type: file.type })
+          (file) =>
+            new File([file], `${+new Date()}_${file.size}_${file.name}`, {
+              type: file.type,
+            })
         )
       );
-    }
+    },
   });
   const style = useMemo(
     () => ({
       ...dropzone,
       ...(isDragActive ? activeStyle : {}),
       ...(isDragAccept ? acceptStyle : {}),
-      ...(isDragReject ? rejectStyle : {})
+      ...(isDragReject ? rejectStyle : {}),
     }),
     [isDragActive, isDragReject, isDragAccept]
   );
 
   //removing previewed files from state
-  const removeFile = file => () => {
+  const removeFile = (file) => () => {
     const newFiles = [...files];
     newFiles.splice(newFiles.indexOf(file), 1);
     setFiles(newFiles);
   };
 
-  const thumbs = files.map(file => (
+  const thumbs = files.map((file) => (
     // <CSSTransition key={file.name} timeout={500} classNames="page">
     <div key={file.name} className="thumbs__thumb" onClick={removeFile(file)}>
       <img src={file.preview} className="thumbs__image" alt={file.name} />
@@ -104,15 +106,15 @@ const UploadImage = ({ setFiles, files, isUploaded, setIsUploaded }) => {
 
   useEffect(
     () => () => {
-      files.forEach(file => URL.revokeObjectURL(file.preview));
+      files.forEach((file) => URL.revokeObjectURL(file.preview));
     },
     [files]
   );
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     if (files.length > 4) {
-      files.forEach(file => {
+      files.forEach((file) => {
         const formData = new FormData();
         formData.append("image", file);
         addImage(formData);
@@ -167,7 +169,7 @@ const UploadImage = ({ setFiles, files, isUploaded, setIsUploaded }) => {
 
 UploadImage.propTypes = {
   files: PropTypes.array.isRequired,
-  setFiles: PropTypes.func.isRequired
+  setFiles: PropTypes.func.isRequired,
 };
 
 export default UploadImage;
