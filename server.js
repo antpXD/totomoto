@@ -11,13 +11,11 @@ connectDB();
 app.use(express.json({ extended: false }));
 app.use(fileUpload());
 
-// app.get("/", (req, res) => res.json({ msg: "Who are you?" }));
-
 //Define routes
 app.use("/api/users", require("./routes/users"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/offers", require("./routes/offers"));
-app.use("/api/offers/upload", require("./routes/offers"));
+app.use("/api/uploads", require("./routes/uploads"));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === "production") {

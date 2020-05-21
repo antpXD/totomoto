@@ -1,0 +1,10 @@
+@media (max-width: 1050px) {
+  .add-offer {
+    &__flex-container {
+      display: block;
+    }
+    &__bottom-section {
+      flex-direction: column;
+    }
+  }
+}

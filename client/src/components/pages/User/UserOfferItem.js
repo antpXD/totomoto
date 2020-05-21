@@ -18,7 +18,7 @@ const UserOfferItem = ({ offer, toggle, onEditToggle }) => {
   const open = Boolean(menu);
 
   //opens menu
-  const handleClick = event => {
+  const handleClick = (event) => {
     setMenu(event.currentTarget);
   };
 
@@ -48,8 +48,8 @@ const UserOfferItem = ({ offer, toggle, onEditToggle }) => {
         {image.length >= 0 ? (
           <Link to={`/offer/${_id}`}>
             <img
-              alt={image[0].fileName}
-              src={image[0].filePath}
+              alt="{s[0].fileName}"
+              src={image[0].fileUrl}
               className="card-small__image"
             />
           </Link>
@@ -90,8 +90,8 @@ const UserOfferItem = ({ offer, toggle, onEditToggle }) => {
                 PaperProps={{
                   style: {
                     width: 200,
-                    marginTop: 60
-                  }
+                    marginTop: 60,
+                  },
                 }}
               >
                 <MenuItem onClick={handleClose}>
@@ -124,7 +124,7 @@ const UserOfferItem = ({ offer, toggle, onEditToggle }) => {
 };
 
 UserOfferItem.propTypes = {
-  offer: PropTypes.object.isRequired
+  offer: PropTypes.object.isRequired,
 };
 
 export default UserOfferItem;

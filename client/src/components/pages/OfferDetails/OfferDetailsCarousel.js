@@ -30,7 +30,7 @@ const bigSliderSettings = {
   slidesToScroll: 1,
   swipeToSlide: true,
   nextArrow: <NextArrow />,
-  prevArrow: <PrevArrow />
+  prevArrow: <PrevArrow />,
 };
 
 const smallSliderSettings = {
@@ -38,7 +38,7 @@ const smallSliderSettings = {
   slidesToShow: 5,
   infinite: true,
   swipeToSlide: true,
-  focusOnSelect: true
+  focusOnSelect: true,
 };
 
 export default class OfferDetailsCarousel extends Component {
@@ -46,14 +46,14 @@ export default class OfferDetailsCarousel extends Component {
     super(props);
     this.state = {
       nav1: null,
-      nav2: null
+      nav2: null,
     };
   }
 
   componentDidMount() {
     this.setState({
       nav1: this.slider1,
-      nav2: this.slider2
+      nav2: this.slider2,
     });
   }
 
@@ -65,11 +65,11 @@ export default class OfferDetailsCarousel extends Component {
             <Slider
               {...bigSliderSettings}
               asNavFor={this.state.nav2}
-              ref={slider => (this.slider1 = slider)}
+              ref={(slider) => (this.slider1 = slider)}
             >
               {this.props.images.map((image, index) => (
                 <div key={index}>
-                  <img src={image.filePath} className="carousel-image" alt="" />
+                  <img src={image.fileUrl} className="carousel-image" alt="" />
                 </div>
               ))}
             </Slider>
@@ -78,12 +78,12 @@ export default class OfferDetailsCarousel extends Component {
             <Slider
               {...smallSliderSettings}
               asNavFor={this.state.nav1}
-              ref={slider => (this.slider2 = slider)}
+              ref={(slider) => (this.slider2 = slider)}
             >
               {this.props.images.map((image, index) => (
                 <div key={index}>
                   <img
-                    src={image.filePath}
+                    src={image.fileUrl}
                     className="carousel-image small"
                     alt=""
                   />
@@ -98,5 +98,5 @@ export default class OfferDetailsCarousel extends Component {
 }
 
 OfferDetailsCarousel.propTypes = {
-  images: PropTypes.array.isRequired
+  images: PropTypes.array.isRequired,
 };

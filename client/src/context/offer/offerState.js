@@ -15,10 +15,10 @@ import {
   OFFER_ERROR,
   ADD_IMAGE,
   IMAGE_ERROR,
-  CLEAR_IMAGE
+  CLEAR_IMAGE,
 } from "../types";
 
-const OfferState = props => {
+const OfferState = (props) => {
   const initialState = {
     userOffers: null,
     allOffers: null,
@@ -26,7 +26,7 @@ const OfferState = props => {
     loading: true,
     current: null,
     uploadedFiles: [],
-    error: null
+    error: null,
   };
   const [state, dispatch] = useReducer(OfferReducer, initialState);
 
@@ -37,12 +37,12 @@ const OfferState = props => {
       const res = await axios.get("/api/offers");
       dispatch({
         type: GET_USER_OFFERS,
-        payload: res.data //user's offers data
+        payload: res.data, //user's offers data
       });
     } catch (error) {
       dispatch({
         type: OFFER_ERROR,
-        payload: error.response.msg
+        payload: error.response.msg,
       });
       console.log(error);
     }
@@ -53,27 +53,27 @@ const OfferState = props => {
       const res = await axios.get("/api/offers/main/all");
       dispatch({
         type: GET_ALL_OFFERS,
-        payload: res.data
+        payload: res.data,
       });
     } catch (error) {
       dispatch({
         type: OFFER_ERROR,
-        payload: error.response.msg
+        payload: error.response.msg,
       });
     }
   };
 
-  const getSingleOffer = async id => {
+  const getSingleOffer = async (id) => {
     const config = {
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     };
     try {
       const res = await axios.get(`/api/offers/${id}`, config);
       dispatch({
         type: GET_SINGLE_OFFER,
-        payload: res.data
+        payload: res.data,
       });
     } catch (error) {
       dispatch({ type: OFFER_ERROR, payload: error.response.msg });
@@ -81,17 +81,17 @@ const OfferState = props => {
   };
 
   //Add Offer
-  const addOffer = async offer => {
+  const addOffer = async (offer) => {
     const config = {
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     };
     try {
       const res = await axios.post("/api/offers", offer, config);
       dispatch({
         type: ADD_OFFER,
-        payload: res.data
+        payload: res.data,
       });
     } catch (error) {
       dispatch({ type: OFFER_ERROR, payload: error.response.msg });
@@ -99,39 +99,39 @@ const OfferState = props => {
   };
 
   //Add image
-  const addImage = async formData => {
+  const addImage = async (formData) => {
     const config = {
       headers: {
-        "Content-Type": "multipart/form-data"
-      }
+        "Content-Type": "multipart/form-data",
+      },
     };
     try {
-      const res = await axios.post("/api/offers/upload", formData, config);
+      const res = await axios.post("/api/uploads", formData, config);
       dispatch({
         type: ADD_IMAGE,
-        payload: res.data
+        payload: res.data,
       });
     } catch (error) {
       dispatch({
         type: IMAGE_ERROR,
-        payload: error
+        payload: error,
       });
       console.log(error);
     }
   };
 
   //Update Offer
-  const updateOffer = async offer => {
+  const updateOffer = async (offer) => {
     const config = {
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     };
     try {
       const res = await axios.put(`/api/offers/${offer._id}`, offer, config);
       dispatch({
         type: UPDATE_OFFER,
-        payload: res.data
+        payload: res.data,
       });
     } catch (error) {
       dispatch({ type: OFFER_ERROR, payload: error.response.msg });
@@ -139,17 +139,17 @@ const OfferState = props => {
   };
 
   //Delete Offer
-  const deleteOffer = async id => {
+  const deleteOffer = async (id) => {
     try {
       await axios.delete(`/api/offers/${id}`);
       dispatch({
         type: DELETE_OFFER,
-        payload: id
+        payload: id,
       });
     } catch (error) {
       dispatch({
         type: OFFER_ERROR,
-        payload: error.response.msg
+        payload: error.response.msg,
       });
     }
   };
@@ -157,28 +157,28 @@ const OfferState = props => {
   //Clear Offers
   const clearOffers = () => {
     dispatch({
-      type: CLEAR_OFFERS
+      type: CLEAR_OFFERS,
     });
   };
 
   //Set Current Offer
-  const setCurrent = offer => {
+  const setCurrent = (offer) => {
     dispatch({
       type: SET_CURRENT,
-      payload: offer
+      payload: offer,
     });
   };
   //Clear Current Offer
   const clearCurrent = () => {
     dispatch({
-      type: CLEAR_CURRENT
+      type: CLEAR_CURRENT,
     });
   };
 
   //Clear Image Array
   const clearImage = () => {
     dispatch({
-      type: CLEAR_IMAGE
+      type: CLEAR_IMAGE,
     });
   };
 
@@ -204,7 +204,7 @@ const OfferState = props => {
         clearOffers,
 
         clearImage,
-        addImage
+        addImage,
       }}
     >
       {props.children}

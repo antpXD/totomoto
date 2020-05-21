@@ -343,7 +343,7 @@ const AddOffer = ({ toggle }) => {
           </div>
         </div>
         <div
-          className="flex-row center-horizontally"
+          className="add-offer__bottom-section"
           style={{ padding: "40px 20px 80px 20px" }}
         >
           <div className="add-offer__contact">

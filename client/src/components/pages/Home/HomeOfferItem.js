@@ -16,17 +16,13 @@ const HomeOfferItem = ({ offer }) => {
     year,
     mileage,
     date,
-    price
+    price,
   } = offer;
 
   return (
     <div className="card">
       <Link to={`/offer/${_id}`}>
-        <img
-          alt={image[0].fileName}
-          src={image[0].filePath}
-          className="card__image"
-        />
+        <img alt="" src={image[0].fileUrl} className="card__image" />
       </Link>
 
       <div className="card__details">
@@ -71,7 +67,7 @@ const HomeOfferItem = ({ offer }) => {
 };
 
 HomeOfferItem.propTypes = {
-  offer: PropTypes.object.isRequired
+  offer: PropTypes.object.isRequired,
 };
 
 export default HomeOfferItem;
