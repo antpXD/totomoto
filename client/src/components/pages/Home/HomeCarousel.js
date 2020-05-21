@@ -35,7 +35,7 @@ const heroSliderSettings = {
   slidesToScroll: 1,
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />,
-  customPaging: i => <i className="fas fa-circle-notch slider-dot" />
+  customPaging: (i) => <i className="fas fa-circle-notch slider-dot" />,
 };
 
 const HomeCarousel = ({ offers }) => {
@@ -53,7 +53,7 @@ const HomeCarousel = ({ offers }) => {
               >
                 <Parallax y={[-28, 20]} tagOuter="figure">
                   <img
-                    src={offer.image[0].filePath}
+                    src={offer.image[0].fileUrl}
                     className="hero-image"
                     alt={offer.make}
                   />
@@ -97,7 +97,7 @@ const HomeCarousel = ({ offers }) => {
 };
 
 HomeCarousel.propTypes = {
-  offers: PropTypes.array.isRequired
+  offers: PropTypes.array.isRequired,
 };
 
 export default HomeCarousel;
