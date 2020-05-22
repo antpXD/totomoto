@@ -4,8 +4,6 @@ const AWS = require("aws-sdk");
 const Busboy = require("busboy");
 require("dotenv").config();
 
-// const singleUpload = upload.single("image");
-
 function uploadToS3(file) {
   let s3bucket = new AWS.S3({
     accessKeyId: process.env.IAM_USER_KEY,

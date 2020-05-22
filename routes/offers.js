@@ -129,7 +129,7 @@ router.post(
         // console.error(err);
         return res.status(500).send("Server Error");
       }
-      res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+      res.json({ fileName: file.name, fileUrl: `/uploads/${file.name}` });
     });
   }
 );

@@ -10,7 +10,6 @@ import { Menu, MenuItem, Grow } from "@material-ui/core/";
 const Navbar = () => {
   const authContext = useContext(AuthContext);
   const { isAuthenticated, logout, user } = authContext;
-  console.log(window.location);
   const offerContext = useContext(OfferContext);
   const { clearOffers } = offerContext;
 
@@ -78,21 +77,19 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <Link to="/" className="logo flex-row">
-        {!window.location.pathname.includes("/offer/") ? (
-          <>
-            <LogoSVG />
-            <h2 className="logo__text p-left__8 p-top__8">toTOmoto</h2>
-          </>
-        ) : (
-          <>
-            <ArrowLeftSVG />{" "}
-            <a className="logout-btn" style={{ fontSize: "16px" }}>
-              Back
-            </a>
-          </>
-        )}
-      </Link>
+      {!window.location.pathname.includes("/offer/") ? (
+        <Link to="/" className="logo flex-row">
+          <LogoSVG />
+          <h2 className="logo__text p-left__8 p-top__8">toTOmoto</h2>
+        </Link>
+      ) : (
+        <Link to="/" className="logo flex-row">
+          <ArrowLeftSVG />{" "}
+          <p className="logout-btn" style={{ fontSize: "16px" }}>
+            Back
+          </p>
+        </Link>
+      )}
 
       <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
     </div>
