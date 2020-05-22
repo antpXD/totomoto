@@ -106,7 +106,7 @@ const OfferState = (props) => {
       },
     };
     try {
-      const res = await axios.post("/api/uploads", formData, config);
+      const res = await axios.post("/api/offers/upload", formData, config);
       dispatch({
         type: ADD_IMAGE,
         payload: res.data,
