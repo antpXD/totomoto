@@ -8,7 +8,7 @@ import ConfirmDialog from "../../layout/ConfirmDialog";
 import { IconButton, Menu, MenuItem } from "@material-ui/core/";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
-const UserOfferItem = ({ offer, toggle, onEditToggle }) => {
+const UserOfferItem = ({ offer, onEditToggle }) => {
   const offerContext = useContext(OfferContext);
   const { deleteOffer, setCurrent, clearCurrent } = offerContext;
 
@@ -29,6 +29,9 @@ const UserOfferItem = ({ offer, toggle, onEditToggle }) => {
   const onEdit = () => {
     onEditToggle();
     setCurrent(offer);
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 500);
     handleClose();
   };
 

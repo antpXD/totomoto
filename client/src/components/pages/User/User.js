@@ -4,7 +4,6 @@ import AddOffer from "./AddOffer";
 import AuthContext from "../../../context/auth/authContext";
 import OfferContext from "../../../context/offer/offerContext";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import Spinner from "../../layout/Spinner";
 
 const User = () => {
   const authContext = useContext(AuthContext);
@@ -26,8 +25,8 @@ const User = () => {
   };
   const onEditToggle = () => showAddOffer === false && setShowAddOffer(true);
 
-  if (offerContext.uploadedFiles === null) {
-    return <Spinner />;
+  if (offerContext.uploadedFiles === null && !offerContext.loading) {
+    window.location.reload();
   }
 
   return (
@@ -62,7 +61,7 @@ const User = () => {
           timeout={800}
           classNames="slideIn"
         >
-          <UserOfferList toggle={toggle} onEditToggle={onEditToggle} />
+          <UserOfferList onEditToggle={onEditToggle} />
         </CSSTransition>
       </TransitionGroup>
     </div>

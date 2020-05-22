@@ -7,7 +7,7 @@ import Footer from "../../layout/Footer";
 
 import OfferContext from "../../../context/offer/offerContext";
 
-const UserOfferList = ({ toggle, onEditToggle }) => {
+const UserOfferList = ({ onEditToggle }) => {
   const offerContext = useContext(OfferContext);
   const { userOffers, loading } = offerContext;
 
@@ -21,30 +21,19 @@ const UserOfferList = ({ toggle, onEditToggle }) => {
 
   return (
     <div>
-      {/* <div className="header-section">
-        <h1 className="header-section__text">Hi, Piotrek.</h1>
-        <div className="add-offer__animated-button" onClick={toggle}>
-          <div className="animated-button-content">add offer</div>
-        </div>
-      </div> */}
-
       <div className="round-container">
         <div className="container">
           <h1>Your offers</h1>
           {userOffers !== null && !loading ? (
             <TransitionGroup className="user-offer__container">
               {userOffers &&
-                userOffers.map(offer => (
+                userOffers.map((offer) => (
                   <CSSTransition
                     key={offer._id}
                     timeout={500}
                     classNames="page"
                   >
-                    <UserOfferItem
-                      offer={offer}
-                      toggle={toggle}
-                      onEditToggle={onEditToggle}
-                    />
+                    <UserOfferItem offer={offer} onEditToggle={onEditToggle} />
                   </CSSTransition>
                 ))}
             </TransitionGroup>

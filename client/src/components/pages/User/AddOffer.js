@@ -136,19 +136,22 @@ const AddOffer = ({ toggle }) => {
     e.preventDefault();
     if (!isEmpty(offer)) {
       setAlert("Fill in all fields", "error");
+    } else if (uploadedFiles.length < 5) {
+      setAlert("You have to upload images.", "error");
     } else if (current === null) {
       addOffer(offer);
       setAlert("Your offer has been added successfully!", "success");
+
+      toggle();
+      SetOffer(INITIAL_STATE);
+      clearImage();
       setFiles([]);
+      setIsUploaded(false);
     } else {
       updateOffer(offer);
       setAlert("Your offer has been edited successfully!", "success");
       clearAll();
     }
-    toggle();
-    SetOffer(INITIAL_STATE);
-    clearImage();
-    setIsUploaded(false);
   };
 
   const clearAll = () => {
@@ -167,6 +170,25 @@ const AddOffer = ({ toggle }) => {
           </div> */}
 
         <div className="add-offer__flex-container">
+          <div className="add-offer__item-center flex-column center-horizontally">
+            <UploadImage
+              files={files}
+              setFiles={setFiles}
+              isUploaded={isUploaded}
+              setIsUploaded={setIsUploaded}
+            />
+            <TextField
+              variant="outlined"
+              multiline
+              rows="10"
+              name="description"
+              value={description}
+              label="Description"
+              onChange={onChange}
+              className={classes.marginTop}
+              fullWidth={true}
+            />
+          </div>
           <div className="add-offer__item-center">
             <div className="flex-row">
               <TextField
@@ -322,25 +344,6 @@ const AddOffer = ({ toggle }) => {
               fullWidth={true}
             />
           </div>
-          <div className="add-offer__item-center flex-column center-horizontally">
-            <UploadImage
-              files={files}
-              setFiles={setFiles}
-              isUploaded={isUploaded}
-              setIsUploaded={setIsUploaded}
-            />
-            <TextField
-              variant="outlined"
-              multiline
-              rows="10"
-              name="description"
-              value={description}
-              label="Description"
-              onChange={onChange}
-              className={classes.marginTop}
-              fullWidth={true}
-            />
-          </div>
         </div>
         <div
           className="add-offer__bottom-section"
@@ -361,17 +364,11 @@ const AddOffer = ({ toggle }) => {
 
             <div
               className={
-                isEmpty(offer) &&
-                (uploadedFiles.length > 4 || offer.image.length > 4)
+                isEmpty(offer)
                   ? "add-offer__animated-button"
                   : "add-offer__animated-button--disabled"
               }
-              onClick={
-                isEmpty(offer) &&
-                (uploadedFiles.length > 4 || offer.image.length > 4)
-                  ? onSubmit
-                  : null
-              }
+              onClick={isEmpty(offer) ? onSubmit : null}
             >
               <div className="animated-button-content">
                 {current ? "update offer" : "add offer"}
