@@ -16,11 +16,12 @@ const Offer = require("../model/Offer");
 router.get("/", auth, async (req, res) => {
   try {
     const offers = await Offer.find({ user: req.user.id }).sort({
-      date: -1
+      date: -1,
     });
     res.json(offers);
   } catch (err) {
     console.log(err);
+    console.log(process.env);
     res.status(500).send("Server Error");
   }
 });
@@ -41,7 +42,7 @@ router.get("/:id", async (req, res) => {
 router.get("/main/all", async (req, res) => {
   try {
     const offers = await Offer.find({}).sort({
-      date: -1
+      date: -1,
     });
     res.json(offers);
   } catch (err) {
@@ -58,13 +59,9 @@ router.post(
   [
     auth, //allows us to get logged in user's id
     [
-      check("make", "Make is required")
-        .not()
-        .isEmpty(),
-      check("model", "Model is required")
-        .not()
-        .isEmpty()
-    ]
+      check("make", "Make is required").not().isEmpty(),
+      check("model", "Model is required").not().isEmpty(),
+    ],
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -86,7 +83,7 @@ router.post(
       engineSize,
       enginePower,
       condition,
-      description
+      description,
     } = req.body;
 
     try {
@@ -104,7 +101,7 @@ router.post(
         mileage: mileage,
         price: price,
         description: description,
-        user: req.user.id
+        user: req.user.id,
       });
       const offer = await newOffer.save();
       res.json(offer);
@@ -118,7 +115,7 @@ router.post(
 router.post(
   "/upload",
   [
-    auth //allows us to get logged in user's id
+    auth, //allows us to get logged in user's id
   ],
   async (req, res) => {
     if (req.files === null) {
@@ -127,7 +124,7 @@ router.post(
 
     const file = req.files.image;
 
-    file.mv(`client/public/uploads/${file.name}`, err => {
+    file.mv(`client/public/uploads/${file.name}`, (err) => {
       if (err) {
         // console.error(err);
         return res.status(500).send("Server Error");
@@ -154,7 +151,7 @@ router.put("/:id", auth, async (req, res) => {
     engineSize,
     enginePower,
     condition,
-    description
+    description,
   } = req.body;
 
   //Build offer object

@@ -2,22 +2,19 @@ const express = require("express");
 const router = express.Router();
 const AWS = require("aws-sdk");
 const Busboy = require("busboy");
-
-const BUCKET_NAME = "totomoto";
-const IAM_USER_KEY = "AKIAQWODMQJ3R7BTQANM";
-const IAM_USER_SECRET = "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";
+require("dotenv").config();
 
 // const singleUpload = upload.single("image");
 
 function uploadToS3(file) {
   let s3bucket = new AWS.S3({
-    accessKeyId: IAM_USER_KEY,
-    secretAccessKey: IAM_USER_SECRET,
-    Bucket: BUCKET_NAME,
+    accessKeyId: process.env.IAM_USER_KEY,
+    secretAccessKey: process.env.IAM_USER_SECRET,
+    Bucket: process.env.BUCKET_NAME,
   });
   s3bucket.createBucket(function () {
     var params = {
-      Bucket: BUCKET_NAME,
+      Bucket: process.env.BUCKET_NAME,
       Key: file.name,
       Body: file.data,
     };

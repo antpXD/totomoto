@@ -18,8 +18,6 @@ import AlertState from "./context/alert/alertState";
 import setAuthToken from "./utils/setAuthToken";
 
 import "./css/App.scss";
-import "./css/settings/fontawesome/scss/fontawesome.scss";
-import "./css/settings/fontawesome/scss/solid.scss";
 import { ParallaxProvider } from "react-scroll-parallax";
 
 setAuthToken(localStorage.token);

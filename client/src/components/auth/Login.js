@@ -13,31 +13,31 @@ import { Button, makeStyles } from "@material-ui/core";
 import ValidationInput from "../helpers/ValidationInput";
 import PasswordInput from "../helpers/PasswordInput";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   borders: {
     borderColor: "#db1c3c",
     background: "#ffe8e8",
     "&:hover": {
       borderColor: "#db1c3c",
-      background: "#fff2f2"
-    }
+      background: "#fff2f2",
+    },
   },
   textField: {
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
   marginTopBottom: {
     marginBottom: theme.spacing(8),
-    margintop: theme.spacing(4)
+    margintop: theme.spacing(4),
   },
   submitButton: {
     background: theme.palette.primary.main,
     "&:hover": {
-      background: theme.palette.primary.main
-    }
-  }
+      background: theme.palette.primary.main,
+    },
+  },
 }));
 
-const Login = props => {
+const Login = (props) => {
   const classes = useStyles();
 
   const alertContext = useContext(AlertContext);
@@ -49,7 +49,7 @@ const Login = props => {
     registerUser,
     error,
     clearErrors,
-    isAuthenticated
+    isAuthenticated,
   } = authContext;
 
   //checks if login form or register form
@@ -73,14 +73,14 @@ const Login = props => {
   }, [error, isAuthenticated, props.history, clearErrors, setAlert]);
 
   const { register, errors, handleSubmit } = useForm({
-    mode: "onBlur"
+    mode: "onBlur",
   });
 
-  const onLogin = values => {
+  const onLogin = (values) => {
     loginUser(values);
   };
 
-  const onRegister = values => {
+  const onRegister = (values) => {
     registerUser(values);
   };
 
@@ -93,7 +93,7 @@ const Login = props => {
           className={clsx(classes.textField, errors.email && classes.borders)}
           name="email"
           inputRef={register({
-            pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+            pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
           })}
         />
       </CSSTransition>
@@ -155,7 +155,7 @@ const Login = props => {
         className={clsx(classes.textField, errors.email && classes.borders)}
         name="email"
         inputRef={register({
-          pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+          pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
         })}
       />
       <PasswordInput
@@ -193,7 +193,7 @@ const Login = props => {
           position: "absolute",
           height: "100vh",
           filter: "brightness(15%)",
-          objectFit: "cover"
+          objectFit: "cover",
         }}
       />
       <CSSTransition in={true} appear={true} timeout={500} classNames="zoomIn">
