@@ -1,6 +1,11 @@
 # toTOmoto
 
-React CRUD app with authentication.
+![MAIN PAGE SCREENSHOT](https://raw.githubusercontent.com/antpXD/totomoto/master/client/src/images/mainpage-screenshot.png)
+
+Full stack app for searching car offers. Uses MongoDB as database, Express on backend and React on frontend. 
+
+## DEMO
+[https://totomoto.herokuapp.com/](https://totomoto.herokuapp.com/)
 
 ## Quick Start
 
