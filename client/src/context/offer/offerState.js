@@ -106,6 +106,7 @@ const OfferState = (props) => {
       },
     };
     try {
+      // path to s3 bucket /api/uploads
       const res = await axios.post("/api/offers/upload", formData, config);
       dispatch({
         type: ADD_IMAGE,
